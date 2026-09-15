@@ -15,9 +15,16 @@ const logos = [
 const track = [...logos, ...logos, ...logos, ...logos];
 
 const NORMAL_RATE = 1;
-const HOVER_RATE = 0.25;
+export const HOVER_RATE = 0.25;
 
-export function TrustedBy() {
+type TrustedByProps = {
+  /** Seconds for one full loop; defaults to --animate-marquee (40s). */
+  duration?: number;
+  /** Playback rate while hovered (1 = normal speed). */
+  hoverRate?: number;
+};
+
+export function TrustedBy({ duration, hoverRate = HOVER_RATE }: TrustedByProps) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   // Changing playbackRate (instead of animation-duration) slows down without jumping position.
@@ -31,10 +38,14 @@ export function TrustedBy() {
 
       <div
         className="marquee-mask mt-10 overflow-hidden"
-        onMouseEnter={() => setRate(HOVER_RATE)}
+        onMouseEnter={() => setRate(hoverRate)}
         onMouseLeave={() => setRate(NORMAL_RATE)}
       >
-        <div ref={trackRef} className="animate-marquee flex w-max items-center">
+        <div
+          ref={trackRef}
+          className="animate-marquee flex w-max items-center"
+          style={duration ? { animationDuration: `${duration}s` } : undefined}
+        >
           {track.map((logo, i) => (
             <div
               key={i}
