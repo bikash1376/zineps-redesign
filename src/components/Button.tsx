@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-type Variant = "primary" | "secondary" | "dark" | "outline";
+type Variant = "primary" | "secondary" | "dark" | "outline" | "ink";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -9,6 +9,7 @@ const variants: Record<Variant, string> = {
     "border-[0.7px] border-line bg-linear-to-b from-white to-line-soft text-subtle hover:text-ink",
   dark: "border border-pine bg-linear-to-b from-green to-forest text-white hover:brightness-110",
   outline: "border border-forest/25 bg-white text-forest hover:border-forest/50",
+  ink: "border border-ink bg-ink text-white hover:bg-[#333333]",
 };
 
 export function Button({

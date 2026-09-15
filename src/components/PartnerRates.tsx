@@ -2,19 +2,32 @@ import Image from "next/image";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Button } from "./Button";
 
-const stats = [
-  { value: "20+", label: "Shipping partners" },
-  { value: "200+", label: "Destination countries" },
-  { value: "1000+", label: "Shipping methods" },
+// Decorative circles from Figma (Desktop - 4), positioned relative to the 1240×598 frame.
+const blobs = [
+  { left: "-9.3%", top: "75.4%" },
+  { left: "15.2%", top: "-28.8%" },
+  { left: "83.6%", top: "-25%" },
+  { left: "91.4%", top: "-20.6%" },
+  { left: "74.5%", top: "94.5%" },
+  { left: "86.5%", top: "88%" },
 ];
 
 export function PartnerRates() {
   return (
-    <section className="mx-auto mt-24 w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
-      <div className="relative grid overflow-hidden rounded-[14px] bg-mint lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-        {/* Copy, proof, action */}
-        <div className="px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:py-20 lg:pr-6 lg:pl-20">
-          <span className="inline-flex items-center rounded-full border border-forest/15 bg-white/70 px-4 py-1.5 text-sm font-medium text-forest">
+    <section className="mx-auto mt-[130px] w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
+      <div className="relative overflow-hidden rounded-[14px] border-6 border-white bg-mint shadow-raised">
+        {blobs.map((blob, i) => (
+          <span
+            key={i}
+            aria-hidden
+            className="pointer-events-none absolute size-48 rounded-full bg-white/50"
+            style={{ left: blob.left, top: blob.top }}
+          />
+        ))}
+
+        {/* Copy and action */}
+        <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-28 lg:pr-10 lg:pl-20">
+          <span className="inline-flex items-center rounded-full border border-forest/15 bg-white/70 px-4 py-1.5 text-sm font-medium text-forest shadow-card">
             Partner shipping rates
           </span>
 
@@ -28,30 +41,17 @@ export function PartnerRates() {
             to the one whose lanes fit your shop.
           </p>
 
-          <dl className="mt-10 grid max-w-[520px] grid-cols-3 divide-x divide-forest/15">
-            {stats.map((stat) => (
-              <div key={stat.label} className="px-4 first:pl-0 sm:px-6">
-                <dt className="sr-only">{stat.label}</dt>
-                <dd className="text-3xl font-medium text-forest sm:text-4xl">{stat.value}</dd>
-                <dd className="mt-1 text-sm text-body-mint">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10">
             <Button href="#" variant="dark">
               Start free
               <ArrowRightIcon size={18} weight="bold" />
             </Button>
-            <Button href="#" variant="outline">
-              How partner rates work
-            </Button>
           </div>
         </div>
 
-        {/* Product mockup bleeding off the right and bottom edges */}
-        <div className="relative pl-6 sm:pl-12 lg:pl-0">
-          <div className="-mr-[20%] overflow-hidden rounded-tl-2xl border border-forest/10 bg-white shadow-raised lg:absolute lg:top-20 lg:left-0 lg:mr-0 lg:w-[125%]">
+        {/* Product mockup, cropped by the panel's right and bottom edges */}
+        <div className="relative pl-6 drop-shadow-mockup sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0">
+          <div className="-mr-[20%] overflow-hidden rounded-tl-2xl border border-forest/10 bg-white lg:mr-0">
             <Image
               src="/images/carrier-broker.png"
               alt="Zineps partner dashboard for CarrierBroker B.V. with label totals, contracts and recent customers"

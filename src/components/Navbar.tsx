@@ -10,15 +10,19 @@ export function Navbar() {
       {/* Empty first column balances the actions so the pill stays centered */}
       <div className="hidden xl:block" />
 
-      <nav className="flex h-[54px] shrink-0 items-center gap-8 rounded-2xl border-[0.7px] border-black/8 bg-white px-5 shadow-nav">
+      <nav className="flex h-[54px] shrink-0 items-center gap-6 rounded-2xl border-[0.7px] border-black/8 bg-white pr-2.5 pl-5 shadow-nav">
         <a href="#" aria-label="Zineps home" className="shrink-0">
           <Image src="/images/zineps-logo.svg" alt="Zineps" width={100} height={22} priority />
         </a>
-        <ul className="hidden items-center gap-6 text-base font-medium whitespace-nowrap text-ink lg:flex">
+        <ul className="-mx-1 hidden items-center gap-1 text-base font-medium whitespace-nowrap text-ink lg:flex">
           {links.map((link) => (
             <li key={link}>
-              <a href="#" className="transition-colors hover:text-green">
-                {link}
+              {/* Pill grows from 75% and fades in behind the item on hover (after nucleoapp.com) */}
+              <a
+                href="#"
+                className="relative block rounded-lg px-3 py-2 outline-none before:absolute before:inset-0 before:scale-75 before:rounded-[inherit] before:bg-[#eef0f1] before:opacity-0 before:transition before:duration-100 before:ease-[ease] hover:before:scale-100 hover:before:opacity-100 focus-visible:before:scale-100 focus-visible:before:opacity-100"
+              >
+                <span className="relative">{link}</span>
               </a>
             </li>
           ))}
