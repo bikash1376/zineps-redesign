@@ -19,15 +19,16 @@ export function Navbar() {
   }, []);
 
   return (
-    <div
-      className={`sticky top-0 z-50 w-full border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out ${
-        scrolled
-          ? "border-white/60 bg-white/55 shadow-[0_8px_32px_rgb(0_0_0/0.06),inset_0_-1px_0_rgb(255_255_255/0.5)] backdrop-blur-xl backdrop-saturate-150"
-          : // At the top the bar is invisible, so only the pill and actions catch clicks
-            "pointer-events-none border-transparent bg-transparent"
-      }`}
-    >
-      <header className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 py-3 md:px-10 lg:px-20 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-10">
+    // Only the pill and actions catch clicks; the rest of the bar lets the page through
+    <div className="pointer-events-none sticky top-0 z-50 w-full">
+      {/* Frosted glass with no hard edge: blur + white wash fade out below the bar */}
+      <div
+        aria-hidden
+        className={`absolute inset-x-0 top-0 h-[calc(100%+40px)] bg-linear-to-b from-white/75 via-white/45 to-white/0 [mask-image:linear-gradient(to_bottom,black_45%,transparent)] backdrop-blur-xl backdrop-saturate-150 transition-opacity duration-300 ease-out ${
+          scrolled ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <header className="relative mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 py-3 md:px-10 lg:px-20 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-10">
         {/* Empty first column balances the actions so the pill stays centered */}
         <div className="hidden xl:block" />
 

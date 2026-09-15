@@ -1,4 +1,5 @@
 import { ChatsCircleIcon, CpuIcon, HandshakeIcon, UsersThreeIcon } from "@phosphor-icons/react/ssr";
+import { Badge } from "./Badge";
 import { SubscribeForm } from "./SubscribeForm";
 
 const tiles = [
@@ -50,8 +51,8 @@ export function Differentiation() {
         ))}
 
         <div className="relative mx-auto max-w-[560px]">
-          <p className="text-sm font-medium text-forest">This makes us different</p>
-          <h2 className="mt-3 text-3xl font-medium text-balance text-ink">
+          <Badge>This makes us different</Badge>
+          <h2 className="mt-5 text-3xl font-medium text-balance text-ink">
             An approach that goes beyond the standard
           </h2>
           <p className="mt-4 text-base text-pretty text-body-mint">

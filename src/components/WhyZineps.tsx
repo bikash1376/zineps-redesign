@@ -10,6 +10,7 @@ import {
   TruckIcon,
 } from "@phosphor-icons/react/ssr";
 import { Badge } from "./Badge";
+import { Reveal } from "./motion/Reveal";
 import { ShipmentsChart } from "./ShipmentsChart";
 
 const integrations = [
@@ -45,23 +46,26 @@ function Card({
   title,
   description,
   className = "",
+  delay = 0,
   children,
 }: {
   label: string;
   title: ReactNode;
   description: string;
   className?: string;
+  delay?: number;
   children: ReactNode;
 }) {
   return (
-    <article
-      className={`relative flex flex-col overflow-hidden rounded-[20px] bg-mint-mist p-6 shadow-border ${className}`}
-    >
-      <Badge>{label}</Badge>
-      <h3 className="mt-4 text-lg font-medium text-balance text-ink">{title}</h3>
-      <p className="mt-1.5 max-w-[440px] text-[15px] text-pretty text-muted">{description}</p>
-      <div className="relative mt-6 flex flex-1 items-end">{children}</div>
-    </article>
+    // Grid span lives on the reveal wrapper so the float-up doesn't break the bento layout
+    <Reveal inView delay={delay} className={className}>
+      <article className="relative flex h-full flex-col overflow-hidden rounded-[20px] bg-mint-mist p-6 shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover">
+        <Badge>{label}</Badge>
+        <h3 className="mt-4 text-lg font-medium text-balance text-ink">{title}</h3>
+        <p className="mt-1.5 max-w-[440px] text-[15px] text-pretty text-muted">{description}</p>
+        <div className="relative mt-6 flex flex-1 items-end">{children}</div>
+      </article>
+    </Reveal>
   );
 }
 
@@ -119,6 +123,7 @@ export function WhyZineps() {
         {/* 2 — narrow */}
         <Card
           className="lg:col-span-2"
+          delay={0.1}
           label="Fast integrations"
           title="Connect within minutes with your webshop, WMS or other systems"
           description="Through our dashboard or extensive API, you can quickly and easily integrate with all popular platforms."
@@ -147,6 +152,7 @@ export function WhyZineps() {
         {/* 3 — narrow */}
         <Card
           className="lg:col-span-2"
+          delay={0.1}
           label="Analytics"
           title="Real-time insights and data-driven decisions"
           description="Track your shipping performance in real-time. Get deep insights to optimize your logistics and reduce costs."
@@ -170,6 +176,7 @@ export function WhyZineps() {
         {/* 4 — wide */}
         <Card
           className="lg:col-span-3"
+          delay={0.2}
           label="Global coverage"
           title="Ship to more than 200+ countries worldwide"
           description="You have access to all major carriers and local transporters worldwide."
@@ -195,7 +202,8 @@ export function WhyZineps() {
         </Card>
 
         {/* 5 — full width */}
-        <article className="relative grid gap-6 overflow-hidden rounded-[20px] bg-mint-mist p-6 shadow-border lg:col-span-5 lg:grid-cols-2 lg:items-center">
+        <Reveal inView delay={0.1} className="lg:col-span-5">
+        <article className="relative grid h-full gap-6 overflow-hidden rounded-[20px] bg-mint-mist p-6 shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover lg:grid-cols-2 lg:items-center">
           <div>
             <Badge>Scalability & Uptime</Badge>
             <h3 className="mt-4 text-lg font-medium text-balance text-ink">
@@ -229,6 +237,7 @@ export function WhyZineps() {
             </div>
           </div>
         </article>
+        </Reveal>
       </div>
     </section>
   );

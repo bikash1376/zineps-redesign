@@ -22,7 +22,7 @@ export function Button({
 }: ComponentProps<"a"> & { variant?: Variant }) {
   return (
     <a
-      className={`inline-flex h-[42px] items-center justify-center gap-2 rounded-xl px-6 text-base leading-4 font-medium whitespace-nowrap shadow-button transition-[scale,filter,background-color,border-color,color,box-shadow] duration-150 ease-out active:scale-[0.96] ${variants[variant]} ${className}`}
+      className={`group inline-flex h-[42px] items-center justify-center gap-2 rounded-xl px-6 text-base leading-4 font-medium whitespace-nowrap shadow-button transition-[scale,filter,background-color,border-color,color,box-shadow] duration-150 ease-out active:scale-[0.96] ${variants[variant]} ${className}`}
       {...props}
     />
   );

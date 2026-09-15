@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { ArrowBadge } from "./ArrowBadge";
 import { Button } from "./Button";
-
-type Logo = { file: string; name: string; ext?: "png" | "svg" };
+import { MagneticLogo, type Logo } from "./motion/MagneticLogo";
 
 // Logos from zineps.com/integrations, arranged in four floating columns
 const columns: { logos: Logo[]; offset: string }[] = [
@@ -46,21 +44,7 @@ const columns: { logos: Logo[]; offset: string }[] = [
   },
 ];
 
-function LogoTile({ logo }: { logo: Logo }) {
-  return (
-    <li className="flex size-20 items-center justify-center rounded-2xl bg-white p-3.5 shadow-border xl:size-24">
-      <span className="relative block size-full">
-        <Image
-          src={`/images/integrations/${logo.file}.${logo.ext ?? "png"}`}
-          alt={logo.name}
-          fill
-          sizes="96px"
-          className="object-contain"
-        />
-      </span>
-    </li>
-  );
-}
+const LogoTile = MagneticLogo;
 
 function Column({ logos, offset }: { logos: Logo[]; offset: string }) {
   return (

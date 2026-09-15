@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useId, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { CheckCircleIcon } from "@phosphor-icons/react";
 import { ArrowBadge } from "./ArrowBadge";
 import { Button } from "./Button";
@@ -53,10 +54,26 @@ const tabs = [
   },
 ];
 
+// Content slides in from the side of the tab you moved toward; exits are shorter and softer
+const slide = {
+  enter: (dir: number) => ({ opacity: 0, x: dir * 32, filter: "blur(4px)" }),
+  center: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3, ease: "easeOut" as const } },
+  exit: (dir: number) => ({
+    opacity: 0,
+    x: dir * -20,
+    filter: "blur(4px)",
+    transition: { duration: 0.15, ease: "easeOut" as const },
+  }),
+};
+
 export function ShippingTabs() {
-  const [active, setActive] = useState(0);
+  const [[active, direction], setState] = useState<[number, number]>([0, 0]);
   const baseId = useId();
   const tab = tabs[active];
+
+  const select = (i: number) => {
+    if (i !== active) setState([i, i > active ? 1 : -1]);
+  };
 
   return (
     // Band starts white, so no top padding: the visible gap above stays exactly mt-section
@@ -64,31 +81,41 @@ export function ShippingTabs() {
       <div className="mx-auto grid w-full max-w-[1600px] items-start gap-12 px-4 pb-20 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-20 lg:pb-24">
         {/* Copy */}
         <div
-          key={tab.id}
           role="tabpanel"
           id={`${baseId}-panel`}
           aria-labelledby={`${baseId}-tab-${active}`}
-          className="order-2 animate-fade-in lg:order-1"
+          className="order-2 lg:order-1"
         >
-          <h2 className="text-3xl font-medium text-ink">
-            {tab.title[0]} <br className="hidden sm:block" />
-            {tab.title[1]}
-          </h2>
-          <p className="mt-5 max-w-[480px] text-base text-muted">{tab.description}</p>
+          <AnimatePresence mode="wait" initial={false} custom={direction}>
+            <motion.div
+              key={tab.id}
+              custom={direction}
+              variants={slide}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              <h2 className="text-3xl font-medium text-ink">
+                {tab.title[0]} <br className="hidden sm:block" />
+                {tab.title[1]}
+              </h2>
+              <p className="mt-5 max-w-[480px] text-base text-pretty text-muted">{tab.description}</p>
 
-          <ul className="mt-8 space-y-3">
-            {tab.features.map((feature) => (
-              <li key={feature} className="flex items-center gap-3 text-base text-muted">
-                <CheckCircleIcon size={20} className="shrink-0 text-soft" />
-                {feature}
-              </li>
-            ))}
-          </ul>
+              <ul className="mt-8 space-y-3">
+                {tab.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-3 text-base text-muted">
+                    <CheckCircleIcon size={20} className="shrink-0 text-soft" aria-hidden />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
-          <Button href="#" variant="ink" className="mt-10 pr-2.5">
-            Read More
-            <ArrowBadge className="text-ink" />
-          </Button>
+              <Button href="#" variant="ink" className="mt-10 pr-2.5">
+                Read More
+                <ArrowBadge className="text-ink" />
+              </Button>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Tabs (aligned with the title's first line) + product image */}
@@ -108,26 +135,46 @@ export function ShippingTabs() {
                   id={`${baseId}-tab-${i}`}
                   aria-selected={selected}
                   aria-controls={`${baseId}-panel`}
-                  onClick={() => setActive(i)}
-                  className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
-                    selected ? "bg-mint text-forest" : "text-forest/80 hover:text-forest"
+                  onClick={() => select(i)}
+                  className={`relative rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-150 ${
+                    selected ? "text-forest" : "text-forest/70 hover:text-forest"
                   }`}
                 >
-                  {t.label}
+                  {/* Active pill glides between tabs */}
+                  {selected && (
+                    <motion.span
+                      layoutId={`${baseId}-active-pill`}
+                      className="absolute inset-0 rounded-full bg-mint"
+                      transition={{ type: "spring", duration: 0.35, bounce: 0 }}
+                    />
+                  )}
+                  <span className="relative">{t.label}</span>
                 </button>
               );
             })}
           </div>
 
-          <Image
-            key={tab.image.src}
-            src={tab.image.src}
-            alt={tab.image.alt}
-            width={tab.image.width}
-            height={tab.image.height}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className={`h-auto w-full max-w-[640px] animate-fade-in ${tab.image.className}`}
-          />
+          <div className="w-full max-w-[640px]">
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <motion.div
+                key={tab.image.src}
+                custom={direction}
+                variants={slide}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                <Image
+                  src={tab.image.src}
+                  alt={tab.image.alt}
+                  width={tab.image.width}
+                  height={tab.image.height}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className={`h-auto w-full ${tab.image.className}`}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>

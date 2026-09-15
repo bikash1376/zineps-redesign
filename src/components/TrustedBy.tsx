@@ -27,7 +27,12 @@ export function TrustedBy() {
 
   return (
     <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
-      <h2 className="text-center text-3xl font-medium text-ink">Trusted by</h2>
+      <div className="mx-auto max-w-[560px] text-center">
+        <h2 className="text-3xl font-medium text-ink">Trusted by</h2>
+        <p className="mt-4 text-base text-pretty text-muted">
+          Brands and webshops that ship with Zineps every day.
+        </p>
+      </div>
 
       <div
         className="marquee-mask mt-heading overflow-hidden"
