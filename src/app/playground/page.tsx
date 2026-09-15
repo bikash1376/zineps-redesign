@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react/ssr";
+import { ArrowRightIcon, CaretDownIcon, CheckCircleIcon, TranslateIcon } from "@phosphor-icons/react/ssr";
 import { Button } from "@/components/Button";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
@@ -96,7 +96,7 @@ function Code({ children }: { children: ReactNode }) {
 }
 
 export default function Playground() {
-  const nav = ["Colors", "Typography", "Buttons", "Radius", "Shadows", "Surfaces", "Elements", "Marquee", "Motion", "Sections"];
+  const nav = ["Colors", "Typography", "Buttons", "Badges", "Radius", "Shadows", "Surfaces", "Elements", "Marquee", "Motion", "Sections"];
 
   return (
     <main className="bg-[#fcfcfc] pb-32">
@@ -186,6 +186,73 @@ export default function Playground() {
             </Table>
           </Section>
 
+          {/* Badges */}
+          <Section id="badges" title="Badges & pills">
+            <Table head={["Preview", "Name", "Classes", "Used in"]}>
+              <tr>
+                <td className="px-4 py-5">
+                  <span className="inline-flex items-center rounded-full border border-forest/15 bg-white/70 px-4 py-1.5 text-sm font-medium text-forest shadow-card">
+                    Partner shipping rates
+                  </span>
+                </td>
+                <td className="px-4 py-5 font-medium text-ink">Section tag</td>
+                <td className="px-4 py-5"><Code>rounded-full border-forest/15 bg-white/70 px-4 py-1.5 text-sm font-medium text-forest shadow-card</Code></td>
+                <td className="px-4 py-5 text-soft">Partner rates (on mint)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-5">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-mint px-4 py-2 text-sm font-medium text-forest">
+                    <span className="size-1.5 rounded-full bg-green" />
+                    Automate Shipping Process
+                  </span>
+                </td>
+                <td className="px-4 py-5 font-medium text-ink">Tab — active</td>
+                <td className="px-4 py-5"><Code>rounded-full bg-mint px-4 py-2 text-sm text-forest</Code> + 6px <Code>bg-green</Code> dot</td>
+                <td className="px-4 py-5 text-soft">Shipping tabs</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-5">
+                  <span className="inline-flex rounded-full px-4 py-2 text-sm font-medium text-forest/80">
+                    Transport Management & B2B shipping
+                  </span>
+                </td>
+                <td className="px-4 py-5 font-medium text-ink">Tab — inactive</td>
+                <td className="px-4 py-5"><Code>rounded-full px-4 py-2 text-sm text-forest/80 hover:text-forest</Code></td>
+                <td className="px-4 py-5 text-soft">Shipping tabs</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-5">
+                  <span className="inline-flex gap-1 rounded-full border border-black/5 bg-white p-1 shadow-card">
+                    <span className="rounded-full bg-mint px-3 py-1.5 text-sm font-medium text-forest">One</span>
+                    <span className="rounded-full px-3 py-1.5 text-sm font-medium text-forest/80">Two</span>
+                  </span>
+                </td>
+                <td className="px-4 py-5 font-medium text-ink">Tab bar (group)</td>
+                <td className="px-4 py-5"><Code>rounded-full sm / rounded-[24px] wrapped, border-black/5 bg-white p-1 shadow-card</Code></td>
+                <td className="px-4 py-5 text-soft">Shipping tabs</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-5">
+                  <span className="inline-flex rounded-lg bg-[#eef0f1] px-3 py-2 text-base font-medium text-ink">Pricing</span>
+                </td>
+                <td className="px-4 py-5 font-medium text-ink">Hover chip</td>
+                <td className="px-4 py-5"><Code>rounded-lg bg-[#eef0f1] px-3 py-2</Code> (scale 0.75 → 1, 100ms)</td>
+                <td className="px-4 py-5 text-soft">Navbar links on hover</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-5">
+                  <span className="inline-flex items-center gap-1.5 text-base font-medium text-muted">
+                    <span className="size-1.5 rounded-full bg-green" />
+                    Status dot
+                  </span>
+                </td>
+                <td className="px-4 py-5 font-medium text-ink">Dot indicator</td>
+                <td className="px-4 py-5"><Code>size-1.5 rounded-full bg-green</Code></td>
+                <td className="px-4 py-5 text-soft">Active tab marker</td>
+              </tr>
+            </Table>
+          </Section>
+
           {/* Radius */}
           <Section id="radius" title="Border radius">
             <div className="mb-6 rounded-xl border border-line bg-white p-5 text-sm text-soft">
@@ -261,20 +328,11 @@ export default function Playground() {
           <Section id="elements" title="Small elements">
             <div className="grid gap-6 md:grid-cols-2">
               <div className="rounded-xl border border-line bg-white p-6">
-                <p className="mb-4 text-sm text-soft">Tag pill (partner rates)</p>
-                <span className="inline-flex items-center rounded-full border border-forest/15 bg-white/70 px-4 py-1.5 text-sm font-medium text-forest shadow-card">
-                  Partner shipping rates
+                <p className="mb-4 text-sm text-soft">Language button (navbar) — Translate 25px + CaretDown 14px bold</p>
+                <span className="inline-flex h-[42px] items-center justify-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle">
+                  <TranslateIcon size={25} className="block shrink-0" />
+                  <CaretDownIcon size={14} weight="bold" className="block shrink-0" />
                 </span>
-              </div>
-              <div className="rounded-xl border border-line bg-white p-6">
-                <p className="mb-4 text-sm text-soft">Tab bar (shipping tabs) — active: bg-mint + dot</p>
-                <div className="inline-flex gap-1 rounded-full border border-black/5 bg-white p-1 shadow-card">
-                  <span className="flex items-center gap-2 rounded-full bg-mint px-4 py-2 text-sm font-medium text-forest">
-                    <span className="size-1.5 rounded-full bg-green" />
-                    Active tab
-                  </span>
-                  <span className="rounded-full px-4 py-2 text-sm font-medium text-forest/80">Inactive tab</span>
-                </div>
               </div>
               <div className="rounded-xl border border-line bg-white p-6">
                 <p className="mb-4 text-sm text-soft">Checklist item (Phosphor CheckCircle 20px, text-soft)</p>
