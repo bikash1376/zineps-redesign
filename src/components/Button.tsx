@@ -1,0 +1,23 @@
+import type { ComponentProps } from "react";
+
+type Variant = "primary" | "secondary";
+
+const variants: Record<Variant, string> = {
+  primary:
+    "border border-sage bg-linear-to-b from-teal to-green text-white inset-shadow-glow hover:brightness-105",
+  secondary:
+    "border-[0.7px] border-line bg-linear-to-b from-white to-line-soft text-subtle hover:text-ink",
+};
+
+export function Button({
+  variant = "primary",
+  className = "",
+  ...props
+}: ComponentProps<"a"> & { variant?: Variant }) {
+  return (
+    <a
+      className={`inline-flex h-[42px] items-center justify-center gap-2 rounded-xl px-6 text-base leading-4 font-medium whitespace-nowrap shadow-button transition ${variants[variant]} ${className}`}
+      {...props}
+    />
+  );
+}
