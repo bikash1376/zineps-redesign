@@ -4,6 +4,7 @@ import { PartnerRates } from "@/components/PartnerRates";
 import { ShippingTabs } from "@/components/ShippingTabs";
 import { Stats } from "@/components/Stats";
 import { TrustedBy } from "@/components/TrustedBy";
+import { WhyZineps } from "@/components/WhyZineps";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <PartnerRates />
       <Stats />
       <ShippingTabs />
+      <WhyZineps />
     </main>
   );
 }
