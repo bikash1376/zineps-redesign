@@ -1,12 +1,14 @@
 import type { ComponentProps } from "react";
 
-type Variant = "primary" | "secondary";
+type Variant = "primary" | "secondary" | "dark" | "outline";
 
 const variants: Record<Variant, string> = {
   primary:
     "border border-sage bg-linear-to-b from-teal to-green text-white inset-shadow-glow hover:brightness-105",
   secondary:
     "border-[0.7px] border-line bg-linear-to-b from-white to-line-soft text-subtle hover:text-ink",
+  dark: "border border-pine bg-linear-to-b from-green to-forest text-white hover:brightness-110",
+  outline: "border border-forest/25 bg-white text-forest hover:border-forest/50",
 };
 
 export function Button({

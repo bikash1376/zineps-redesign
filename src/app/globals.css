@@ -13,6 +13,9 @@
   --color-pine: #3d5f56;
   --color-pine-deep: #2f4a42;
 
+  /* Readable body text on mint surfaces */
+  --color-body-mint: #4a5d58;
+
   /* Neutrals */
   --color-muted: #8a8a8a;
   --color-subtle: #878787;
@@ -36,6 +39,26 @@
   --shadow-card: 0 4px 8px 0 rgb(0 0 0 / 0.05);
   --shadow-raised: 0 6px 20px 0 rgb(0 0 0 / 0.12);
   --inset-shadow-glow: inset 0 -4px 8px 0 rgb(112 202 185 / 0.5);
+
+  /* Motion */
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Soft fade on both edges of the logo marquee */
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation-play-state: paused;
+  }
 }
 
 /* Opaque mist-to-pine gradient behind the dashboard mockup (sampled from ref/gradient.png) */
