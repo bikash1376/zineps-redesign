@@ -3,7 +3,7 @@ import { Button } from "./Button";
 
 export function Hero() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 pt-16 md:px-[100px] md:pt-[78px]">
+    <section className="mx-auto w-full max-w-[1600px] px-4 pt-16 md:px-10 md:pt-[78px] lg:px-20">
       <p className="text-base font-medium text-green">
         For businesses that ship, and the logistics partners that move their goods
       </p>
@@ -23,7 +23,7 @@ export function Hero() {
       </div>
 
       {/* Dashboard showcase */}
-      <div className="dashboard-backdrop relative mt-[100px] overflow-hidden rounded-section p-4 sm:p-10 lg:p-20">
+      <div className="dashboard-backdrop relative mt-14 overflow-hidden rounded-[14px] p-4 sm:p-10 lg:p-20">
         <div className="relative overflow-hidden rounded-2xl bg-white">
           <Image
             src="/images/dashboard.png"

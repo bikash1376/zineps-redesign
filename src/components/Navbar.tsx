@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { TranslateIcon } from "@phosphor-icons/react/ssr";
+import { CaretDownIcon, TranslateIcon } from "@phosphor-icons/react/ssr";
 import { Button } from "./Button";
 
 const links = ["Products", "Integrations", "Pricing", "Blogs", "Knowledge base"];
 
 export function Navbar() {
   return (
-    <header className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-4 pt-5 md:px-[100px]">
-      {/* Spacer keeps the pill centered on wide screens */}
-      <div className="hidden w-[208px] xl:block" />
+    <header className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 pt-5 md:px-10 lg:px-20 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-10">
+      {/* Empty first column balances the actions so the pill stays centered */}
+      <div className="hidden xl:block" />
 
       <nav className="flex h-[54px] shrink-0 items-center gap-8 rounded-2xl border-[0.7px] border-black/8 bg-white px-5 shadow-nav">
         <a href="#" aria-label="Zineps home" className="shrink-0">
@@ -25,14 +25,14 @@ export function Navbar() {
         </ul>
       </nav>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center justify-end gap-5">
         <button
           type="button"
           aria-label="Change language"
-          className="hidden h-[42px] items-center gap-1 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3 text-subtle transition-colors hover:text-ink sm:flex"
+          className="hidden h-[42px] items-center justify-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle transition-colors hover:text-ink sm:flex"
         >
-          <TranslateIcon size={26} className="size-[26px] shrink-0" />
-          <Image src="/icons/chevron-down.svg" alt="" width={20} height={20} />
+          <TranslateIcon size={25} className="block shrink-0" />
+          <CaretDownIcon size={14} weight="bold" className="block shrink-0" />
         </button>
         <Button href="#" className="px-7 shadow-none">
           Sign up
