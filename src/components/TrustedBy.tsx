@@ -26,11 +26,11 @@ export function TrustedBy() {
   };
 
   return (
-    <section className="mx-auto mt-24 w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
+    <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
       <h2 className="text-center text-3xl font-medium text-ink">Trusted by</h2>
 
       <div
-        className="marquee-mask mt-10 overflow-hidden"
+        className="marquee-mask mt-heading overflow-hidden"
         onMouseEnter={() => setRate(HOVER_RATE)}
         onMouseLeave={() => setRate(NORMAL_RATE)}
       >

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useId, useState } from "react";
-import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon } from "@phosphor-icons/react";
+import { ArrowBadge } from "./ArrowBadge";
 import { Button } from "./Button";
 
 const tabs = [
@@ -58,8 +59,9 @@ export function ShippingTabs() {
   const tab = tabs[active];
 
   return (
-    <section className="mt-24 w-full bg-linear-to-b from-white to-surface-soft">
-      <div className="mx-auto grid w-full max-w-[1600px] items-start gap-12 px-4 py-20 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-20 lg:py-28">
+    // Band starts white, so no top padding: the visible gap above stays exactly mt-section
+    <section className="mt-section w-full bg-linear-to-b from-white to-surface-soft">
+      <div className="mx-auto grid w-full max-w-[1600px] items-start gap-12 px-4 pb-20 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-20 lg:pb-24">
         {/* Copy */}
         <div
           key={tab.id}
@@ -83,9 +85,9 @@ export function ShippingTabs() {
             ))}
           </ul>
 
-          <Button href="#" variant="ink" className="mt-10">
+          <Button href="#" variant="ink" className="mt-10 pr-2.5">
             Read More
-            <ArrowRightIcon size={18} weight="bold" />
+            <ArrowBadge className="text-ink" />
           </Button>
         </div>
 
@@ -111,7 +113,6 @@ export function ShippingTabs() {
                     selected ? "bg-mint text-forest" : "text-forest/80 hover:text-forest"
                   }`}
                 >
-                  {selected && <span className="size-1.5 rounded-full bg-green" aria-hidden />}
                   {t.label}
                 </button>
               );
