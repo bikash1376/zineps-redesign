@@ -1,19 +1,20 @@
-import { ArrowRightIcon, StorefrontIcon, TruckIcon } from "@phosphor-icons/react/ssr";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
+import { StorefrontPathIcon, TruckPathIcon } from "./motion/PathIcons";
 
 const paths = [
   {
     title: "For businesses that ship",
     description: "Start shipping in minutes, including partner shipping rates, your own contracts, or both.",
     href: "#",
-    icon: StorefrontIcon,
+    icon: StorefrontPathIcon,
   },
   {
     title: "For logistics partners",
     description: "Digitize your offering, serve the customers you already have, and bring them onto Zineps.",
     href: "#",
-    icon: TruckIcon,
+    icon: TruckPathIcon,
   },
 ];
 
@@ -44,7 +45,7 @@ export function StartWhereYouAre() {
                 className="group flex items-start gap-5 rounded-[20px] bg-mint-mist p-6 shadow-border transition-[box-shadow] duration-150 ease-out hover:shadow-border-hover"
               >
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-forest shadow-border">
-                  <path.icon size={22} aria-hidden />
+                  <path.icon size={22} />
                 </span>
                 <span className="flex-1">
                   <span className="block text-lg font-medium text-ink">{path.title}</span>

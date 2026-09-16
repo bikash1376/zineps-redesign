@@ -171,6 +171,86 @@
   }
 }
 
+/*
+ * "Start where you are" card icons (PathIcons.tsx): hovering the card animates parts of the
+ * vector. Transitions ease back on leave; the loops only run while hovered.
+ */
+.path-icon {
+  overflow: visible;
+}
+.path-icon * {
+  transform-box: fill-box;
+}
+.store-awning {
+  transform-origin: top;
+}
+.store-door {
+  transform-origin: left;
+  vector-effect: non-scaling-stroke;
+}
+.truck-wheel {
+  transform-origin: center;
+}
+.truck-speed {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .store-door,
+  .truck-drive {
+    transition: transform 320ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .truck-speed {
+    transition:
+      stroke-dashoffset 320ms cubic-bezier(0.2, 0, 0, 1),
+      opacity 200ms ease-out;
+  }
+  .group:hover .store-awning {
+    animation: awning-flutter 650ms ease-out;
+  }
+  .group:hover .store-door {
+    transform: scaleX(0.35);
+  }
+  .group:hover .truck-drive {
+    transform: translateX(1.5px);
+  }
+  .group:hover .truck-chassis {
+    animation: truck-bob 360ms ease-in-out infinite;
+  }
+  .group:hover .truck-wheel {
+    animation: wheel-spin 450ms linear infinite;
+  }
+  .group:hover .truck-speed {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  .group:hover .truck-speed-late {
+    transition-delay: 80ms;
+  }
+}
+@keyframes awning-flutter {
+  30% {
+    transform: scaleY(1.14);
+  }
+  60% {
+    transform: scaleY(0.95);
+  }
+  85% {
+    transform: scaleY(1.03);
+  }
+}
+@keyframes truck-bob {
+  50% {
+    transform: translateY(-0.6px);
+  }
+}
+@keyframes wheel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Soft fade on both edges of the logo marquee */
 .marquee-mask {
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
