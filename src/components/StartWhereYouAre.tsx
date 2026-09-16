@@ -34,9 +34,15 @@ export function StartWhereYouAre() {
             Merchants start shipping in minutes, including partner rates. Logistics partners
             digitize their offering and bring their merchants with them.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3 sm:gap-[23px]">
-            <Button href="#">Start shipping</Button>
-            <Button href="#" variant="secondary">
+          <div className="mt-8 flex flex-wrap gap-2 sm:gap-[23px]">
+            <Button href="#" className="max-sm:h-10 max-sm:px-3.5 max-sm:text-sm">
+              Start shipping
+            </Button>
+            <Button
+              href="#"
+              variant="secondary"
+              className="max-sm:h-10 max-sm:px-3.5 max-sm:text-sm"
+            >
               I’m a logistics partner
             </Button>
           </div>

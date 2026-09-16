@@ -23,9 +23,11 @@ export function Hero() {
         </p>
       </Reveal>
       <Reveal delay={0.2}>
-        <div className="mt-8 flex flex-wrap gap-3 sm:gap-[23px]">
-          <Button href="#">Start Shipping</Button>
-          <Button href="#" variant="secondary">
+        <div className="mt-8 flex flex-wrap gap-2 sm:gap-[23px]">
+          <Button href="#" className="max-sm:h-10 max-sm:px-3.5 max-sm:text-sm">
+            Start Shipping
+          </Button>
+          <Button href="#" variant="secondary" className="max-sm:h-10 max-sm:px-3.5 max-sm:text-sm">
             I’m a logistics partner
           </Button>
         </div>

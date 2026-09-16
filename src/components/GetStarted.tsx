@@ -17,14 +17,23 @@ export function GetStarted() {
         <div className="relative mx-auto max-w-[600px]">
           <h2 className="text-3xl font-medium text-balance text-white">Get started right away?</h2>
           <p className="mt-4 text-base text-pretty text-mint">
-            Create an account to get started or contact us for a customized solution for your business.
+            Create an account to get started or contact us for a customized solution for your
+            business.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="#" variant="light" className="pr-[9px] pl-5">
+          <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
+            <Button
+              href="#"
+              variant="light"
+              className="pr-[9px] pl-5 max-sm:h-10 max-sm:pr-2 max-sm:pl-4 max-sm:text-sm"
+            >
               Start your trial
               <ArrowBadge className="bg-forest! text-white" />
             </Button>
-            <Button href="#" variant="outline-light">
+            <Button
+              href="#"
+              variant="outline-light"
+              className="max-sm:h-10 max-sm:px-3.5 max-sm:text-sm"
+            >
               Contact us
             </Button>
           </div>

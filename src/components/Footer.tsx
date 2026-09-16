@@ -84,7 +84,10 @@ export function Footer() {
         </div>
 
         {columns.map((column) => (
-          <div key={column.title}>
+          <div
+            key={column.title}
+            className={column.title === "Contact" ? "col-span-2 lg:col-span-1" : undefined}
+          >
             <h3 className="text-sm font-medium text-ink">{column.title}</h3>
             <ul className="mt-5 space-y-3">
               {column.links.map((link) => (

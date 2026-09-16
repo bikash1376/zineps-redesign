@@ -37,7 +37,7 @@ export function Navbar() {
         <div className="hidden xl:block" />
 
         {/* Floating white pill that stays identical while scrolling (like diabrowser.com) */}
-        <nav className="pointer-events-auto flex h-[54px] shrink-0 items-center gap-6 rounded-2xl border-[0.7px] border-black/8 bg-white pr-2.5 pl-5 shadow-nav">
+        <nav className="pointer-events-auto flex h-12 shrink-0 items-center gap-6 rounded-2xl border-[0.7px] border-black/8 bg-white px-5 shadow-nav lg:h-[54px] lg:pr-2.5">
           <a href="#" aria-label="Zineps home" className="shrink-0">
             <Image src="/images/zineps-logo.svg" alt="Zineps" width={100} height={22} priority />
           </a>
@@ -71,7 +71,7 @@ export function Navbar() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="relative flex size-11 items-center justify-center rounded-xl border-[0.7px] border-line bg-white text-ink shadow-nav transition-[scale] duration-150 ease-out active:scale-[0.96] lg:hidden"
+            className="relative flex size-12 items-center justify-center rounded-xl border-[0.7px] border-line bg-white text-ink shadow-nav transition-[scale] duration-150 ease-out active:scale-[0.96] lg:hidden"
           >
             <ListIcon
               size={22}

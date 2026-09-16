@@ -133,6 +133,7 @@
   :root {
     --spacing-section: 96px;
     --spacing-heading: 40px;
+    --text-3xl: 1.625rem;
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {

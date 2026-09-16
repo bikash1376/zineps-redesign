@@ -57,7 +57,12 @@ const tabs = [
 // Content slides in from the side of the tab you moved toward; exits are shorter and softer
 const slide = {
   enter: (dir: number) => ({ opacity: 0, x: dir * 32, filter: "blur(4px)" }),
-  center: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3, ease: "easeOut" as const } },
+  center: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.3, ease: "easeOut" as const },
+  },
   exit: (dir: number) => ({
     opacity: 0,
     x: dir * -20,
@@ -99,12 +104,21 @@ export function ShippingTabs() {
                 {tab.title[0]} <br className="hidden sm:block" />
                 {tab.title[1]}
               </h2>
-              <p className="mt-5 max-w-[480px] text-base text-pretty text-muted">{tab.description}</p>
+              <p className="mt-5 max-w-[480px] text-base text-pretty text-muted">
+                {tab.description}
+              </p>
 
               <ul className="mt-8 space-y-3">
                 {tab.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-[15px] text-muted sm:text-base">
-                    <CheckCircleIcon size={20} className="mt-px shrink-0 text-soft sm:mt-0.5" aria-hidden />
+                  <li
+                    key={feature}
+                    className="flex items-start gap-3 text-[15px] text-muted sm:text-base"
+                  >
+                    <CheckCircleIcon
+                      size={20}
+                      className="mt-px shrink-0 text-soft sm:mt-0.5"
+                      aria-hidden
+                    />
                     {feature}
                   </li>
                 ))}
@@ -123,7 +137,7 @@ export function ShippingTabs() {
           <div
             role="tablist"
             aria-label="Shipping solutions"
-            className="flex max-w-full flex-wrap justify-center gap-1 rounded-[24px] border border-black/5 bg-white p-1 shadow-card sm:flex-nowrap sm:rounded-full"
+            className="flex w-full max-w-full justify-center gap-1 rounded-[20px] border border-black/5 bg-white p-1 shadow-card sm:w-auto sm:rounded-full"
           >
             {tabs.map((t, i) => {
               const selected = i === active;
@@ -136,7 +150,7 @@ export function ShippingTabs() {
                   aria-selected={selected}
                   aria-controls={`${baseId}-panel`}
                   onClick={() => select(i)}
-                  className={`relative rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-150 ${
+                  className={`relative flex-1 rounded-2xl px-3 py-2 text-[13px] leading-tight font-medium text-balance transition-colors duration-150 sm:flex-none sm:rounded-full sm:px-4 sm:text-sm sm:leading-normal sm:whitespace-nowrap ${
                     selected ? "text-forest" : "text-forest/70 hover:text-forest"
                   }`}
                 >
@@ -144,7 +158,7 @@ export function ShippingTabs() {
                   {selected && (
                     <motion.span
                       layoutId={`${baseId}-active-pill`}
-                      className="absolute inset-0 rounded-full bg-mint"
+                      className="absolute inset-0 rounded-2xl bg-mint sm:rounded-full"
                       transition={{ type: "spring", duration: 0.35, bounce: 0 }}
                     />
                   )}
