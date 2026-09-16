@@ -1,7 +1,20 @@
 import Image from "next/image";
-import { LinkedinLogoIcon, XLogoIcon } from "@phosphor-icons/react/ssr";
+import type { ComponentType } from "react";
+import {
+  EnvelopeDuotoneIcon,
+  LinkedinDuotoneIcon,
+  MapPinDuotoneIcon,
+  PhoneDuotoneIcon,
+  XDuotoneIcon,
+} from "./DuotoneIcons";
 
-const columns = [
+type FooterLink = {
+  label: string;
+  href: string;
+  icon?: ComponentType<{ size?: number; className?: string }>;
+};
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Products",
     links: [
@@ -23,16 +36,20 @@ const columns = [
   {
     title: "Contact",
     links: [
-      { label: "info@zineps.com", href: "mailto:info@zineps.com" },
-      { label: "020 261 4474", href: "tel:+31202614474" },
-      { label: "Herikerbergweg 288, 1101CT Amsterdam", href: "https://maps.google.com/?q=Herikerbergweg+288+Amsterdam" },
+      { label: "info@zineps.com", href: "mailto:info@zineps.com", icon: EnvelopeDuotoneIcon },
+      { label: "020 261 4474", href: "tel:+31202614474", icon: PhoneDuotoneIcon },
+      {
+        label: "Herikerbergweg 288, 1101CT Amsterdam",
+        href: "https://maps.google.com/?q=Herikerbergweg+288+Amsterdam",
+        icon: MapPinDuotoneIcon,
+      },
     ],
   },
 ];
 
 const socials = [
-  { label: "Zineps on LinkedIn", href: "#", icon: LinkedinLogoIcon },
-  { label: "Zineps on X", href: "#", icon: XLogoIcon },
+  { label: "Zineps on LinkedIn", href: "#", icon: LinkedinDuotoneIcon },
+  { label: "Zineps on X", href: "#", icon: XDuotoneIcon },
 ];
 
 /** Footer after the Figma footer-inspo: brand + socials left, link columns right, copyright row. */
@@ -54,9 +71,12 @@ export function Footer() {
                 <a
                   href={social.href}
                   aria-label={social.label}
-                  className="flex size-10 items-center justify-center rounded-lg text-soft transition-colors duration-150 hover:bg-surface-soft hover:text-ink"
+                  className="group flex size-10 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-surface-soft"
                 >
-                  <social.icon size={20} aria-hidden />
+                  <social.icon
+                    size={22}
+                    className="transition-transform duration-150 ease-out group-hover:scale-110"
+                  />
                 </a>
               </li>
             ))}
@@ -71,8 +91,14 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted transition-colors duration-150 hover:text-ink"
+                    className="group inline-flex items-start gap-2 text-sm text-muted transition-colors duration-150 hover:text-ink"
                   >
+                    {link.icon && (
+                      <link.icon
+                        size={16}
+                        className="mt-0.5 shrink-0 transition-transform duration-150 ease-out group-hover:scale-110"
+                      />
+                    )}
                     {link.label}
                   </a>
                 </li>

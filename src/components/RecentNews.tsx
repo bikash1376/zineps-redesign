@@ -8,15 +8,18 @@ import { ArrowRightIcon, CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/r
 const news = [
   {
     title: "Zineps closes late-seed investment to accelerate its next phase of growth",
-    excerpt: "Amsterdam, The Netherlands, Zineps has successfully closed its late-seed investment round.",
+    excerpt:
+      "Amsterdam, The Netherlands, Zineps has successfully closed its late-seed investment round.",
     category: "News",
     date: "23 Jul 2026",
     image: "/images/news/late-seed.jpg",
     href: "https://www.zineps.com/newsroom/late-seed",
   },
   {
-    title: "Late July 2026 platform update: bulk customs automation, smarter address books, and more reliable carriers",
-    excerpt: "Full customs-data support for bulk shipment imports, EORI and VAT autofill in the address book.",
+    title:
+      "Late July 2026 platform update: bulk customs automation, smarter address books, and more reliable carriers",
+    excerpt:
+      "Full customs-data support for bulk shipment imports, EORI and VAT autofill in the address book.",
     category: "Updates",
     date: "20 Jul 2026",
     image: "/images/news/late-july-update.jpg",
@@ -32,7 +35,8 @@ const news = [
   },
   {
     title: "Global shipping at scale: Zineps enables delivery to over 200 countries",
-    excerpt: "Zineps now supports shipping to over 200 countries worldwide for both e-commerce and B2B shipments.",
+    excerpt:
+      "Zineps now supports shipping to over 200 countries worldwide for both e-commerce and B2B shipments.",
     category: "News",
     date: "21 Dec 2025",
     image: "/images/news/global-shipping.jpg",
@@ -73,7 +77,7 @@ function ArrowButton({
 
 /**
  * Newsroom carousel, same UI as zineps.com: horizontally scrolling cards with prev/next
- * controls. Portrait cards with 20px corners and white text over a bottom fade.
+ * controls. Framed cards with the artwork uncropped on top and the copy below.
  * The native scrollbar is hidden; arrows and swipe drive the scroll.
  */
 export function RecentNews() {
@@ -139,26 +143,29 @@ export function RecentNews() {
       >
         {news.map((item) => (
           <li key={item.href} className="w-[66%] shrink-0 snap-start sm:w-[280px] lg:w-[310px]">
-            {/* Portrait card (4:5): thin white frame + soft frame shadow like the globe stats, dark fade at the bottom */}
+            {/* Framed card: image on top at the artwork's own landscape ratio, copy below on mint */}
             <a
               href={item.href}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-[20px] border-[5px] border-white bg-mint-mist shadow-frame"
+              className="group flex h-full flex-col overflow-hidden rounded-[20px] border-[5px] border-white bg-mint-mist shadow-frame"
             >
-              <Image
-                src={item.image}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 310px, (min-width: 640px) 280px, 66vw"
-                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-b from-black/0 via-black/20 to-black/60"
-              />
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[15px] bg-white">
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 310px, (min-width: 640px) 280px, 66vw"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                />
+              </div>
 
-              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                <h3 className="line-clamp-3 text-lg font-medium text-balance text-white sm:text-xl">{item.title}</h3>
-                <p className="mt-2 hidden text-sm text-pretty text-white/80 sm:line-clamp-2">{item.excerpt}</p>
+              <div className="flex flex-1 flex-col p-4 sm:p-5">
+                <p className="text-xs text-muted tabular-nums">
+                  {item.category} · {item.date}
+                </p>
+                <h3 className="mt-2 line-clamp-3 text-lg font-medium text-balance text-ink">
+                  {item.title}
+                </h3>
+                <p className="mt-2 line-clamp-2 text-sm text-pretty text-muted">{item.excerpt}</p>
               </div>
             </a>
           </li>
