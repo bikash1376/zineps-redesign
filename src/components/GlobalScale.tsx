@@ -6,7 +6,7 @@ const statistics = [
     value: "100+ million",
     description: "of economic value is annually created by merchants who ship via Zineps.",
     // Positions over the globe on desktop, from ref/globe.png
-    position: "lg:left-[10%] lg:top-[10%]",
+    position: "lg:left-[20%] lg:top-[24%]",
   },
   {
     value: "300+ million",
@@ -34,13 +34,13 @@ export function GlobalScale() {
         </p>
       </div>
 
-      <div className="relative mt-heading flex flex-col overflow-hidden rounded-[14px] bg-linear-to-b from-[#FDFDFD] to-[#E9E9E9] px-4 pt-6 sm:px-8 lg:block lg:px-0 lg:pt-28">
+      <div className="relative mt-10 flex flex-col overflow-hidden rounded-[14px] bg-linear-to-b from-[#FDFDFD] to-[#E9E9E9] px-4 pt-6 sm:px-8 lg:block lg:px-0 lg:pt-16">
         {/* Stats sit on top of the globe on desktop; they stack above it on smaller screens */}
         <dl className="relative z-10 grid gap-3 sm:grid-cols-3 lg:static lg:block">
           {statistics.map((stat) => (
             <div
               key={stat.value}
-              className={`flex flex-col-reverse rounded-2xl border-4 border-white bg-mint-mist px-5 py-4 shadow-border lg:absolute lg:z-10 lg:w-[320px] ${stat.position}`}
+              className={`flex flex-col-reverse rounded-3xl border-[5px] border-white bg-mint-mist px-5 py-4 shadow-frame lg:absolute lg:z-10 lg:w-[320px] ${stat.position}`}
             >
               <dt className="mt-1 text-sm text-pretty text-muted">{stat.description}</dt>
               <dd className="text-2xl font-medium text-forest">{stat.value}</dd>

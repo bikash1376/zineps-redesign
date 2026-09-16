@@ -1,21 +1,17 @@
-import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
+import { ShootingArrow } from "./motion/ShootingArrow";
 
 /**
  * White circle with an arrow tinted in the button's own color, used inside
  * solid CTAs ("Start free", "Read More"). Pass the button color as `className`.
- * The arrow nudges right when the parent Button (a `group`) is hovered.
+ * The arrow shoots through the circle on hover, and back the other way on leave.
  */
 export function ArrowBadge({ className = "text-ink" }: { className?: string }) {
   return (
     <span
       aria-hidden
-      className={`flex size-6 shrink-0 items-center justify-center rounded-full bg-white ${className}`}
+      className={`flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ${className}`}
     >
-      <ArrowRightIcon
-        size={14}
-        weight="bold"
-        className="transition-transform duration-150 ease-out group-hover:translate-x-0.5"
-      />
+      <ShootingArrow size={14} />
     </span>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
-import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon } from "@phosphor-icons/react";
+import { ShootingArrow } from "./motion/ShootingArrow";
 
 /** Email field with an inset square submit button (Figma contact-us inspo). */
 export function SubscribeForm() {
@@ -35,9 +36,9 @@ export function SubscribeForm() {
         <button
           type="submit"
           aria-label="Sign up for updates"
-          className="relative flex size-9 shrink-0 items-center justify-center rounded-md bg-linear-to-b from-teal to-green text-white inset-shadow-glow transition-[scale,filter] duration-150 ease-out hover:brightness-110 active:scale-[0.96] after:absolute after:-inset-1"
+          className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-linear-to-b from-teal to-green text-white inset-shadow-glow transition-[scale,filter] duration-150 ease-out hover:brightness-110 active:scale-[0.96] after:absolute after:-inset-1"
         >
-          <ArrowRightIcon size={16} weight="bold" />
+          <ShootingArrow size={16} />
         </button>
       </div>
       <p aria-live="polite" className="mt-3 min-h-5 text-sm">

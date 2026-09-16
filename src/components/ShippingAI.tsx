@@ -68,7 +68,7 @@ export function ShippingAI() {
         />
 
         {/* Copy and action */}
-        <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-28 lg:pr-10 lg:pl-20">
+        <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-20 lg:pr-10 lg:pl-20">
           <Badge>Shipping AI</Badge>
           <h2 className="mt-5 text-3xl font-medium text-balance text-ink">
             Predict delays. Pick better routes. Spend less.

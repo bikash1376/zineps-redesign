@@ -139,10 +139,10 @@ export function RecentNews() {
       >
         {news.map((item) => (
           <li key={item.href} className="w-[66%] shrink-0 snap-start sm:w-[280px] lg:w-[310px]">
-            {/* Portrait card (4:5), 20px corners like the other cards, dark fade only at the bottom */}
+            {/* Portrait card (4:5): thin white frame + soft frame shadow like the globe stats, dark fade at the bottom */}
             <a
               href={item.href}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-[20px] bg-pine shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover"
+              className="group relative block aspect-[4/5] overflow-hidden rounded-[20px] border-[5px] border-white bg-mint-mist shadow-frame"
             >
               <Image
                 src={item.image}

@@ -4,20 +4,11 @@ import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
 import { useMotionValue, useReducedMotion, useSpring } from "motion/react";
 
-type LatLng = [number, number];
-
-// A few small hubs only, so the dotted map stays the focus
-const markers: { location: LatLng; size: number }[] = [
-  { location: [52.3676, 4.9041], size: 0.035 }, // Amsterdam
-  { location: [40.7128, -74.006], size: 0.03 }, // New York
-  { location: [1.3521, 103.8198], size: 0.03 }, // Singapore
-];
-
 const MOVEMENT_DAMPING = 1400;
 
 /**
  * Magic UI's cobe globe, ported to cobe v2 (update() loop instead of onRender):
- * light grey dotted land, orange hubs, slow auto-rotation and spring-damped drag.
+ * light grey dotted land, slow auto-rotation and spring-damped drag.
  */
 export function Globe({ className = "" }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -53,9 +44,7 @@ export function Globe({ className = "" }: { className?: string }) {
       baseColor: [1, 1, 1],
       markerColor: [251 / 255, 100 / 255, 21 / 255],
       glowColor: [1, 1, 1],
-      markers,
-      // cobe v2 lifts markers 0.05 off the surface by default, which reads as floating dots
-      markerElevation: 0,
+      markers: [], // no hub dots, just the dotted map
     });
 
     const tick = () => {

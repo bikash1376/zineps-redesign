@@ -51,6 +51,11 @@
   --shadow-card: 0 4px 8px 0 rgb(0 0 0 / 0.05);
   --shadow-raised: 0 6px 20px 0 rgb(0 0 0 / 0.12);
 
+  /* Framed cards (globe stats, news): #F4F4F4 hairline + three soft #A4A9B5 drop shadows */
+  --shadow-frame:
+    0 0 0 1px #f4f4f4, 0 1px 1px rgb(164 169 181 / 0.12), 0 4px 12px rgb(164 169 181 / 0.1),
+    0 2px 4px rgb(164 169 181 / 0.1);
+
   /* Shadow-as-border: 1px ring + lift + ambient depth (bento cards, tiles) */
   --shadow-border:
     0 0 0 1px oklch(0 0 0 / 0.06), 0 1px 2px -1px oklch(0 0 0 / 0.06),
@@ -67,6 +72,47 @@
   /* Motion */
   --animate-marquee: marquee 40s linear infinite;
   --animate-fade-in: fade-in 0.35s ease-out;
+  /* CTA arrow: on hover shoots out right and re-enters from the left; on leave the reverse */
+  --animate-arrow-shoot: arrow-shoot 0.55s cubic-bezier(0.2, 0, 0, 1);
+  --animate-arrow-shoot-back: arrow-shoot-back 0.55s cubic-bezier(0.2, 0, 0, 1);
+
+  @keyframes arrow-shoot-back {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    40% {
+      transform: translateX(-170%);
+      opacity: 0;
+    }
+    41% {
+      transform: translateX(170%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes arrow-shoot {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    40% {
+      transform: translateX(170%);
+      opacity: 0;
+    }
+    41% {
+      transform: translateX(-170%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
   @keyframes fade-in {
     from {
