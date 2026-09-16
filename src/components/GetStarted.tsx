@@ -15,11 +15,11 @@ export function GetStarted() {
             Create an account to get started or contact us for a customized solution for your business.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="#" variant="light" className="pr-2.5 shadow-none">
+            <Button href="#" variant="light" className="pr-2.5">
               Start your trial
               <ArrowBadge className="bg-forest! text-white" />
             </Button>
-            <Button href="#" variant="outline-light" className="shadow-none">
+            <Button href="#" variant="outline-light">
               Contact us
             </Button>
           </div>

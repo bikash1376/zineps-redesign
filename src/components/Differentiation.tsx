@@ -1,31 +1,5 @@
-import { ChatsCircleIcon, CpuIcon, HandshakeIcon, UsersThreeIcon } from "@phosphor-icons/react/ssr";
 import { Badge } from "./Badge";
 import { SubscribeForm } from "./SubscribeForm";
-
-const tiles = [
-  {
-    title: "Building together",
-    description: "We build together with our customers and continuously improve based on their feedback.",
-    icon: UsersThreeIcon,
-  },
-  {
-    title: "Personal contact",
-    description:
-      "At Zineps, we stay close to our customers. We listen, think along, and provide tailored support, so no one is left alone.",
-    icon: ChatsCircleIcon,
-  },
-  {
-    title: "Strong partnerships",
-    description:
-      "Together with our partners, we offer competitive rates, smart workflows, and valuable advice for both online stores and logistics providers.",
-    icon: HandshakeIcon,
-  },
-  {
-    title: "Focus on technology",
-    description: "We build tools that make e-commerce and logistics faster and easier.",
-    icon: CpuIcon,
-  },
-];
 
 // Same decorative circles as the partner rates panel (Figma Desktop - 4)
 const blobs = [
@@ -63,18 +37,6 @@ export function Differentiation() {
           <SubscribeForm />
         </div>
       </div>
-
-      <ul className="mt-heading grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {tiles.map((tile) => (
-          <li key={tile.title} className="rounded-[20px] bg-mint-mist p-6 shadow-border">
-            <span className="flex size-10 items-center justify-center rounded-xl bg-white text-forest shadow-border">
-              <tile.icon size={20} aria-hidden />
-            </span>
-            <h3 className="mt-5 text-lg font-medium text-ink">{tile.title}</h3>
-            <p className="mt-1.5 text-[15px] text-pretty text-muted">{tile.description}</p>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

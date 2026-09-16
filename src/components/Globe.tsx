@@ -2,109 +2,122 @@
 
 import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
+import { useMotionValue, useReducedMotion, useSpring } from "motion/react";
 
 type LatLng = [number, number];
 
-const AMSTERDAM: LatLng = [52.3676, 4.9041];
-
-// Hubs Zineps ships to, with lanes drawn from Amsterdam
-const hubs: LatLng[] = [
-  [51.5072, -0.1276], // London
-  [52.52, 13.405], // Berlin
-  [40.4168, -3.7038], // Madrid
-  [40.7128, -74.006], // New York
-  [-23.5505, -46.6333], // São Paulo
-  [25.2048, 55.2708], // Dubai
-  [1.3521, 103.8198], // Singapore
-  [35.6762, 139.6503], // Tokyo
-  [-33.8688, 151.2093], // Sydney
-  [-26.2041, 28.0473], // Johannesburg
+// A few small hubs only, so the dotted map stays the focus
+const markers: { location: LatLng; size: number }[] = [
+  { location: [52.3676, 4.9041], size: 0.035 }, // Amsterdam
+  { location: [40.7128, -74.006], size: 0.03 }, // New York
+  { location: [1.3521, 103.8198], size: 0.03 }, // Singapore
 ];
 
+const MOVEMENT_DAMPING = 1400;
+
 /**
- * Interactive WebGL globe (cobe) in the Zineps palette: mint land dots, green hubs and
- * forest-green shipping lanes out of Amsterdam. Drag to spin; auto-rotation stops when
- * the OS asks for reduced motion.
+ * Magic UI's cobe globe, ported to cobe v2 (update() loop instead of onRender):
+ * light grey dotted land, orange hubs, slow auto-rotation and spring-damped drag.
  */
 export function Globe({ className = "" }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const dragStart = useRef<{ x: number; offset: number } | null>(null);
-  const dragOffset = useRef(0);
+  const pointerStart = useRef<number | null>(null);
+  const reduceMotion = useReducedMotion();
+
+  const rotation = useMotionValue(0);
+  const rotationSpring = useSpring(rotation, { mass: 1, damping: 30, stiffness: 100 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let size = canvas.offsetWidth * dpr;
-    let phi = 0.2;
+    let width = canvas.offsetWidth;
+    let phi = 0;
     let frame = 0;
 
-    const globe = createGlobe(canvas, {
-      devicePixelRatio: dpr,
-      width: size,
-      height: size,
-      phi,
-      theta: 0.28,
-      dark: 0,
-      diffuse: 1.25,
-      mapSamples: 16000,
-      mapBrightness: 5.5,
-      baseColor: [0.86, 0.94, 0.92],
-      markerColor: [0.2, 0.61, 0.52],
-      glowColor: [0.93, 0.97, 0.96],
-      markers: [
-        { location: AMSTERDAM, size: 0.08 },
-        ...hubs.map((location) => ({ location, size: 0.045 })),
-      ],
-      arcs: hubs.map((to) => ({ from: AMSTERDAM, to })),
-      arcColor: [0.29, 0.45, 0.41],
-      arcWidth: 0.6,
-      arcHeight: 0.28,
-      markerElevation: 0.01,
-    });
-
     const onResize = () => {
-      size = canvas.offsetWidth * dpr;
+      width = canvas.offsetWidth;
     };
     window.addEventListener("resize", onResize);
 
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: 2,
+      width: width * 2,
+      height: width * 2,
+      phi: 0,
+      theta: 0.3,
+      dark: 0,
+      diffuse: 0.4,
+      mapSamples: 16000,
+      mapBrightness: 1.2,
+      baseColor: [1, 1, 1],
+      markerColor: [251 / 255, 100 / 255, 21 / 255],
+      glowColor: [1, 1, 1],
+      markers,
+      // cobe v2 lifts markers 0.05 off the surface by default, which reads as floating dots
+      markerElevation: 0,
+    });
+
     const tick = () => {
-      if (!dragStart.current && !reduceMotion) phi += 0.0025;
-      globe.update({ phi: phi + dragOffset.current, width: size, height: size });
+      if (pointerStart.current === null && !reduceMotion) phi += 0.005;
+      globe.update({ phi: phi + rotationSpring.get(), width: width * 2, height: width * 2 });
       frame = requestAnimationFrame(tick);
     };
-    tick();
+
+    // Only spin (and render) while the globe is on screen and the tab is visible
+    let onScreen = false;
+    const start = () => {
+      if (!frame && onScreen && !document.hidden) frame = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        if (onScreen) start();
+        else stop();
+      },
+      { rootMargin: "100px" },
+    );
+    observer.observe(canvas);
+    const onVisibility = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVisibility);
+
+    // Draw one frame so the globe isn't blank before it first scrolls into view
+    globe.update({ phi, width: width * 2, height: width * 2 });
     canvas.style.opacity = "1";
 
     return () => {
-      cancelAnimationFrame(frame);
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("resize", onResize);
       globe.destroy();
     };
-  }, []);
+  }, [reduceMotion, rotationSpring]);
+
+  const setDragging = (value: number | null) => {
+    pointerStart.current = value;
+    if (canvasRef.current) canvasRef.current.style.cursor = value !== null ? "grabbing" : "grab";
+  };
 
   return (
-    <div className={`relative aspect-square w-full ${className}`}>
+    <div className={`aspect-square w-full ${className}`}>
       <canvas
         ref={canvasRef}
         role="img"
-        aria-label="Globe showing Zineps shipping lanes from Amsterdam to hubs worldwide"
-        className="size-full cursor-grab touch-pan-y opacity-0 transition-opacity duration-700 ease-out active:cursor-grabbing"
-        onPointerDown={(e) => {
-          dragStart.current = { x: e.clientX, offset: dragOffset.current };
-          e.currentTarget.setPointerCapture(e.pointerId);
-        }}
+        aria-label="Rotating globe with Zineps shipping hubs"
+        className="size-full cursor-grab touch-pan-y opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
+        onPointerDown={(e) => setDragging(e.clientX)}
+        onPointerUp={() => setDragging(null)}
+        onPointerOut={() => setDragging(null)}
         onPointerMove={(e) => {
-          if (!dragStart.current) return;
-          dragOffset.current = dragStart.current.offset + (e.clientX - dragStart.current.x) / 180;
-        }}
-        onPointerUp={() => {
-          dragStart.current = null;
-        }}
-        onPointerCancel={() => {
-          dragStart.current = null;
+          if (pointerStart.current === null) return;
+          const delta = e.clientX - pointerStart.current;
+          pointerStart.current = e.clientX;
+          rotation.set(rotation.get() + delta / (MOVEMENT_DAMPING / 10));
         }}
       />
     </div>

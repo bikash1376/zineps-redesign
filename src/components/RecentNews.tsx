@@ -73,8 +73,8 @@ function ArrowButton({
 
 /**
  * Newsroom carousel, same UI as zineps.com: horizontally scrolling cards with prev/next
- * controls. Cards are square-cornered and larger, with the text set in white over a
- * bottom fade. The native scrollbar is hidden; arrows and swipe drive the scroll.
+ * controls. Portrait cards with 20px corners and white text over a bottom fade.
+ * The native scrollbar is hidden; arrows and swipe drive the scroll.
  */
 export function RecentNews() {
   const trackRef = useRef<HTMLUListElement>(null);
@@ -134,34 +134,27 @@ export function RecentNews() {
       <ul
         ref={trackRef}
         onScroll={updateEdges}
-        className="mt-heading flex snap-x snap-mandatory gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        // Scroll containers clip on both axes: pad the track so card shadows aren't cut off
+        className="-mx-2 mt-[calc(var(--spacing-heading)-0.5rem)] -mb-2 flex scroll-px-2 snap-x snap-mandatory gap-6 overflow-x-auto px-2 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {news.map((item) => (
-          <li key={item.href} className="w-[85%] shrink-0 snap-start sm:w-[440px] lg:w-[480px]">
-            <a href={item.href} className="group relative block aspect-[4/3] overflow-hidden bg-pine">
+          <li key={item.href} className="w-[66%] shrink-0 snap-start sm:w-[280px] lg:w-[310px]">
+            {/* Portrait card (4:5), 20px corners like the other cards, dark fade only at the bottom */}
+            <a
+              href={item.href}
+              className="group relative block aspect-[4/5] overflow-hidden rounded-[20px] bg-pine shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover"
+            >
               <Image
                 src={item.image}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 480px, (min-width: 640px) 440px, 85vw"
+                sizes="(min-width: 1024px) 310px, (min-width: 640px) 280px, 66vw"
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              />
-              {/* Top scrim for the meta, bottom fade for the title */}
-              <div
-                aria-hidden
-                className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-black/45 to-black/0"
               />
               <div
                 aria-hidden
                 className="absolute inset-x-0 bottom-0 h-3/4 bg-linear-to-b from-black/0 via-black/45 to-black/85"
               />
-
-              <p className="absolute top-4 left-4 text-xs sm:top-5 sm:left-5 font-medium tracking-wide text-white uppercase">
-                {item.category}
-                <span className="mt-0.5 block font-normal tracking-normal text-white/80 normal-case">
-                  <time>{item.date}</time>
-                </span>
-              </p>
 
               <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                 <h3 className="line-clamp-3 text-lg font-medium text-balance text-white sm:text-xl">{item.title}</h3>

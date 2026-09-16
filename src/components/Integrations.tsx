@@ -1,4 +1,5 @@
 import { ArrowBadge } from "./ArrowBadge";
+import { Badge } from "./Badge";
 import { Button } from "./Button";
 import { MagneticLogo, type Logo } from "./motion/MagneticLogo";
 
@@ -60,7 +61,7 @@ export function Integrations() {
   const [c1, c2, c3, c4] = columns;
 
   return (
-    <section className="relative mx-auto mt-section w-full max-w-[1600px] overflow-hidden px-4 md:px-10 lg:px-20">
+    <section className="relative mx-auto mt-section w-full max-w-[1600px] overflow-x-clip px-4 md:px-10 lg:px-20">
       <div className="grid items-center gap-12 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-10">
         {/* Left logo columns */}
         <div className="hidden gap-5 lg:flex" aria-hidden>
@@ -70,7 +71,8 @@ export function Integrations() {
 
         {/* Copy */}
         <div className="mx-auto flex max-w-[560px] flex-col items-center text-center">
-          <h2 className="text-3xl font-medium text-balance text-ink">More than 100+ integrations</h2>
+          <Badge>Integrations</Badge>
+          <h2 className="mt-5 text-3xl font-medium text-balance text-ink">More than 100+ integrations</h2>
           <p className="mt-4 text-base text-pretty text-muted">
             Connect Zineps seamlessly with popular marketplaces, e-commerce platforms and logistics
             partners. Optimize your workflow, reduce your shipping costs and offer your customers a

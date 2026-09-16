@@ -30,7 +30,7 @@ export function MagneticLogo({ logo }: { logo: Logo }) {
         x.set(0);
         y.set(0);
       }}
-      className="flex size-20 items-center justify-center rounded-2xl bg-white p-3.5 shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover xl:size-24"
+      className="flex size-16 items-center justify-center rounded-xl bg-white p-3 shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover xl:size-20 xl:rounded-2xl"
     >
       <span className="relative block size-full">
         <Image

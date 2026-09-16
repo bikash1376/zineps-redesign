@@ -11,12 +11,6 @@ import { ArrowBadge } from "./ArrowBadge";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
 
-const signals = [
-  { label: "Predict delays", description: "Spot risky lanes before you ship" },
-  { label: "Pick better routes", description: "Best carrier per shipment" },
-  { label: "Spend less", description: "Rate that fits the delivery promise" },
-];
-
 const options = [
   {
     carrier: "DHL Parcel",
@@ -60,8 +54,8 @@ function Risk({ level }: { level: "low" | "medium" }) {
 }
 
 /**
- * Shipping AI: copy on the left, a live-looking recommendation card on the right so the
- * three promises (predict, route, spend) are shown rather than only stated.
+ * Shipping AI: same layout as the partner rates panel. Copy fills the left half, and the
+ * recommendation card sits on the right, cropped by the panel's right and bottom edges.
  */
 export function ShippingAI() {
   return (
@@ -73,38 +67,26 @@ export function ShippingAI() {
           className="pointer-events-none absolute -right-40 -bottom-40 size-[560px] rounded-full bg-mint/60 blur-3xl"
         />
 
-        <div className="relative grid items-center gap-12 px-6 py-14 sm:px-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 lg:py-16 lg:pr-16 lg:pl-20">
-          <div>
-            <Badge>
-              <SparkleIcon size={16} weight="fill" aria-hidden />
-              Shipping AI
-            </Badge>
-            <h2 className="mt-5 text-3xl font-medium text-balance text-ink">
-              Predict delays. Pick better routes. Spend less.
-            </h2>
-            <p className="mt-4 max-w-[460px] text-base text-pretty text-soft">
-              Shipping AI is the intelligence in the layer. It recommends the better carrier, route, and
-              rate for every shipment.
-            </p>
+        {/* Copy and action */}
+        <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-28 lg:pr-10 lg:pl-20">
+          <Badge>Shipping AI</Badge>
+          <h2 className="mt-5 text-3xl font-medium text-balance text-ink">
+            Predict delays. Pick better routes. Spend less.
+          </h2>
+          <p className="mt-4 max-w-[460px] text-base text-pretty text-soft">
+            Shipping AI is the intelligence in the layer. It recommends the better carrier, route, and rate
+            for every shipment.
+          </p>
+          <Button href="#" variant="ink" className="mt-10 pr-2.5">
+            Explore Shipping AI
+            <ArrowBadge className="text-ink" />
+          </Button>
+        </div>
 
-            <ul className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-              {signals.map((signal) => (
-                <li key={signal.label} className="border-l-2 border-green/40 pl-3">
-                  <p className="text-sm font-medium text-ink">{signal.label}</p>
-                  <p className="mt-0.5 text-sm text-pretty text-muted">{signal.description}</p>
-                </li>
-              ))}
-            </ul>
-
-            <Button href="#" variant="ink" className="mt-10 pr-2.5">
-              Explore Shipping AI
-              <ArrowBadge className="text-ink" />
-            </Button>
-          </div>
-
-          {/* Recommendation card */}
-          <div className="rounded-[20px] bg-white/70 p-2 shadow-border backdrop-blur">
-            <div className="rounded-xl bg-white p-5 shadow-border">
+        {/* Recommendation card, cropped by the panel's right and bottom edges */}
+        <div className="relative pl-6 sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0">
+          <div className="-mr-[20%] rounded-tl-[20px] bg-white/70 p-2 pr-0 pb-0 shadow-border backdrop-blur lg:mr-0">
+            <div className="rounded-tl-xl bg-white p-5 pr-[30%] pb-20 shadow-border lg:pr-[38%] lg:pb-40">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
                 <div className="flex items-center gap-3">
                   <span className="flex size-9 items-center justify-center rounded-lg bg-mint-soft text-forest">

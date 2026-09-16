@@ -9,16 +9,7 @@ import { Button } from "./Button";
 const links = ["Products", "Integrations", "Pricing", "Blogs", "Knowledge base"];
 
 export function Navbar() {
-  // The whole bar turns to frosted glass once the page scrolls beneath it
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Close the mobile menu on Escape or when resizing up to desktop
   useEffect(() => {
@@ -33,27 +24,15 @@ export function Navbar() {
     };
   }, [menuOpen]);
 
-  const glass = scrolled || menuOpen;
-
   return (
     // Only the pill and actions catch clicks; the rest of the bar lets the page through
     <div className="pointer-events-none sticky top-0 z-50 w-full">
-      {/* Frosted glass with no hard edge: blur + white wash fade out below the bar */}
-      <div
-        aria-hidden
-        className={`absolute inset-x-0 top-0 h-[calc(100%+40px)] bg-linear-to-b from-white/75 via-white/45 to-white/0 [mask-image:linear-gradient(to_bottom,black_45%,transparent)] backdrop-blur-xl backdrop-saturate-150 transition-opacity duration-300 ease-out ${
-          glass ? "opacity-100" : "opacity-0"
-        }`}
-      />
       <header className="relative mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 py-3 md:px-10 lg:px-20 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-10">
         {/* Empty first column balances the actions so the pill stays centered */}
         <div className="hidden xl:block" />
 
-        <nav
-          className={`pointer-events-auto flex h-[54px] shrink-0 items-center gap-6 rounded-2xl border-[0.7px] pr-2.5 pl-5 transition-[background-color,border-color,box-shadow] duration-300 ease-out ${
-            glass ? "border-transparent bg-transparent shadow-none" : "border-black/8 bg-white shadow-nav"
-          }`}
-        >
+        {/* Floating white pill that stays identical while scrolling (like diabrowser.com) */}
+        <nav className="pointer-events-auto flex h-[54px] shrink-0 items-center gap-6 rounded-2xl border-[0.7px] border-black/8 bg-white pr-2.5 pl-5 shadow-nav">
           <a href="#" aria-label="Zineps home" className="shrink-0">
             <Image src="/images/zineps-logo.svg" alt="Zineps" width={100} height={22} priority />
           </a>
@@ -76,12 +55,12 @@ export function Navbar() {
           <button
             type="button"
             aria-label="Change language"
-            className="hidden h-[42px] items-center justify-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle transition-colors hover:text-ink sm:flex"
+            className="hidden h-[42px] items-center justify-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle shadow-nav transition-colors hover:text-ink sm:flex"
           >
             <TranslateIcon size={25} className="block shrink-0" />
             <CaretDownIcon size={14} weight="bold" className="block shrink-0" />
           </button>
-          <Button href="#" className="hidden px-7 shadow-none sm:inline-flex">
+          <Button href="#" className="hidden px-7 ring-[0.7px] ring-black/8 sm:inline-flex">
             Sign up
           </Button>
 
@@ -92,7 +71,7 @@ export function Navbar() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="relative flex size-11 items-center justify-center rounded-xl border-[0.7px] border-line bg-white text-ink shadow-button transition-[scale] duration-150 ease-out active:scale-[0.96] lg:hidden"
+            className="relative flex size-11 items-center justify-center rounded-xl border-[0.7px] border-line bg-white text-ink shadow-nav transition-[scale] duration-150 ease-out active:scale-[0.96] lg:hidden"
           >
             <ListIcon
               size={22}
@@ -143,7 +122,7 @@ export function Navbar() {
                   <TranslateIcon size={22} aria-hidden />
                   <CaretDownIcon size={14} weight="bold" aria-hidden />
                 </button>
-                <Button href="#" className="flex-1 shadow-none sm:hidden">
+                <Button href="#" className="flex-1 sm:hidden">
                   Sign up
                 </Button>
               </div>
