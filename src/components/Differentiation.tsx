@@ -1,28 +1,22 @@
 import { Badge } from "./Badge";
+import { ParallaxBlobs } from "./motion/ParallaxBlobs";
 import { SubscribeForm } from "./SubscribeForm";
 
 // Same decorative circles as the partner rates panel (Figma Desktop - 4)
 const blobs = [
-  { left: "-9.3%", top: "62%" },
-  { left: "15.2%", top: "-34%" },
-  { left: "80%", top: "-30%" },
-  { left: "90%", top: "-22%" },
-  { left: "72%", top: "86%" },
-  { left: "86.5%", top: "76%" },
+  { left: "-9.3%", top: "62%", depth: 1.2 },
+  { left: "15.2%", top: "-34%", depth: 0.8 },
+  { left: "80%", top: "-30%", depth: 1 },
+  { left: "90%", top: "-22%", depth: 1.6 },
+  { left: "72%", top: "86%", depth: 0.7 },
+  { left: "86.5%", top: "76%", depth: 1.3 },
 ];
 
 export function Differentiation() {
   return (
     <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
       <div className="relative overflow-hidden rounded-[14px] border-6 border-white bg-mint px-6 py-20 text-center shadow-raised sm:py-24">
-        {blobs.map((blob, i) => (
-          <span
-            key={i}
-            aria-hidden
-            className="pointer-events-none absolute size-48 rounded-full bg-white/50"
-            style={{ left: blob.left, top: blob.top }}
-          />
-        ))}
+        <ParallaxBlobs blobs={blobs} />
 
         <div className="relative mx-auto max-w-[560px]">
           <Badge>This makes us different</Badge>

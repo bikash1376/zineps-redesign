@@ -648,6 +648,7 @@ const CustomBar = (props: CustomBarProps) => {
   const visibleBar = (
     <>
       <Rectangle
+        className="evil-bar-fill"
         x={x}
         y={y}
         width={width}
@@ -673,7 +674,7 @@ const CustomBar = (props: CustomBarProps) => {
   );
 
   return (
-    <g style={cursorStyle} onClick={onClick}>
+    <g className="evil-bar" style={cursorStyle} onClick={onClick}>
       {/* Full-height invisible rect keeps the whole column hoverable/clickable */}
       <Rectangle {...props} fill="transparent" />
       {/* The painted bar grows in from its baseline; the hit rect above stays put */}

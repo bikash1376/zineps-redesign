@@ -149,6 +149,28 @@
   mask-image: radial-gradient(ellipse at center, #000 45%, transparent 72%);
 }
 
+/*
+ * Analytics bars: hovering the chart mutes every bar (short, subtle); the bar under the
+ * pointer snaps back to full color, and fades back to muted once the pointer moves on.
+ * Durations live on the destination state, so "in" and "out" can differ.
+ */
+.bar-hover-mute .evil-bar-fill {
+  transition: opacity 180ms ease-out;
+}
+.bar-hover-mute:hover .evil-bar-fill {
+  opacity: 0.35;
+  transition: opacity 260ms ease-out;
+}
+.bar-hover-mute .evil-bar:hover .evil-bar-fill {
+  opacity: 1;
+  transition-duration: 50ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar-hover-mute .evil-bar-fill {
+    transition: none;
+  }
+}
+
 /* Soft fade on both edges of the logo marquee */
 .marquee-mask {
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);

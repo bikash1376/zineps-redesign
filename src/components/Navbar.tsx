@@ -2,14 +2,19 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { CaretDownIcon, ListIcon, TranslateIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "./Button";
+import { LanguageMenu } from "./LanguageMenu";
 
 const links = ["Products", "Integrations", "Pricing", "Blogs", "Knowledge base"];
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Language + Sign up scroll away with the page (only the pill stays pinned)
+  const { scrollY } = useScroll();
+  const actionsY = useTransform(scrollY, (v) => -Math.min(v, 160));
 
   // Close the mobile menu on Escape or when resizing up to desktop
   useEffect(() => {
@@ -52,17 +57,12 @@ export function Navbar() {
         </nav>
 
         <div className="pointer-events-auto flex items-center justify-end gap-3 sm:gap-5">
-          <button
-            type="button"
-            aria-label="Change language"
-            className="hidden h-[42px] items-center justify-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle shadow-nav transition-colors hover:text-ink sm:flex"
-          >
-            <TranslateIcon size={25} className="block shrink-0" />
-            <CaretDownIcon size={14} weight="bold" className="block shrink-0" />
-          </button>
-          <Button href="#" className="hidden px-7 ring-[0.7px] ring-black/8 sm:inline-flex">
-            Sign up
-          </Button>
+          <motion.div style={{ y: actionsY }} className="hidden items-center gap-5 sm:flex">
+            <LanguageMenu />
+            <Button href="#" className="hidden px-7 ring-[0.7px] ring-black/8 sm:inline-flex">
+              Sign up
+            </Button>
+          </motion.div>
 
           {/* Mobile / tablet menu toggle */}
           <button
@@ -96,7 +96,12 @@ export function Navbar() {
               id="mobile-menu"
               initial={{ opacity: 0, y: -8, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -8, scale: 0.98, transition: { duration: 0.15 } }}
+              exit={{
+                opacity: 0,
+                y: -8,
+                scale: 0.98,
+                transition: { duration: 0.15 },
+              }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="pointer-events-auto absolute inset-x-4 top-full origin-top rounded-2xl bg-white p-2 shadow-raised md:inset-x-10 lg:hidden"
             >

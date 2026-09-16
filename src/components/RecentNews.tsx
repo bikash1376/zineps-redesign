@@ -153,7 +153,7 @@ export function RecentNews() {
               />
               <div
                 aria-hidden
-                className="absolute inset-x-0 bottom-0 h-3/4 bg-linear-to-b from-black/0 via-black/45 to-black/85"
+                className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-b from-black/0 via-black/20 to-black/60"
               />
 
               <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">

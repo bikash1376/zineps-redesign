@@ -10,6 +10,7 @@ import {
 import { ArrowBadge } from "./ArrowBadge";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
+import { Reveal } from "./motion/Reveal";
 
 const options = [
   {
@@ -69,22 +70,36 @@ export function ShippingAI() {
 
         {/* Copy and action */}
         <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-20 lg:pr-10 lg:pl-20">
-          <Badge>Shipping AI</Badge>
-          <h2 className="mt-5 text-3xl font-medium text-balance text-ink">
-            Predict delays. Pick better routes. Spend less.
-          </h2>
-          <p className="mt-4 max-w-[460px] text-base text-pretty text-soft">
-            Shipping AI is the intelligence in the layer. It recommends the better carrier, route, and rate
-            for every shipment.
-          </p>
-          <Button href="#" variant="ink" className="mt-10 pr-2.5">
-            Explore Shipping AI
-            <ArrowBadge className="text-ink" />
-          </Button>
+          {/* Copy reveals block by block as the panel scrolls into view */}
+          <Reveal inView>
+            <Badge>Shipping AI</Badge>
+          </Reveal>
+          <Reveal inView delay={0.08}>
+            <h2 className="mt-5 text-3xl font-medium text-balance text-ink">
+              Predict delays. Pick better routes. Spend less.
+            </h2>
+          </Reveal>
+          <Reveal inView delay={0.16}>
+            <p className="mt-4 max-w-[460px] text-base text-pretty text-soft">
+              Shipping AI is the intelligence in the layer. It recommends the better carrier, route, and
+              rate for every shipment.
+            </p>
+          </Reveal>
+          <Reveal inView delay={0.24} className="mt-10">
+            <Button href="#" variant="ink" className="pr-2.5">
+              Explore Shipping AI
+              <ArrowBadge className="text-ink" />
+            </Button>
+          </Reveal>
         </div>
 
         {/* Recommendation card, cropped by the panel's right and bottom edges */}
-        <div className="relative pl-6 sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0">
+        <Reveal
+          inView
+          from="right"
+          delay={0.15}
+          className="relative pl-6 sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0"
+        >
           <div className="-mr-[20%] rounded-tl-[20px] bg-white/70 p-2 pr-0 pb-0 shadow-border backdrop-blur lg:mr-0">
             <div className="rounded-tl-xl bg-white p-5 pr-[30%] pb-20 shadow-border lg:pr-[38%] lg:pb-40">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
@@ -145,7 +160,7 @@ export function ShippingAI() {
               </p>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -5,9 +5,9 @@ import { Reveal } from "./motion/Reveal";
 export function Hero() {
   return (
     <section className="mx-auto w-full max-w-[1600px] px-4 pt-8 md:px-10 md:pt-12 lg:px-20">
-      {/* <p className="text-base font-medium text-green">
+      <p className="text-base font-medium text-green">
         For businesses that ship, and the logistics partners that move their goods
-      </p> */}
+      </p>
 
       {/* Block-level float-up, staggered ~100ms: title → copy → actions → dashboard */}
       <Reveal>
