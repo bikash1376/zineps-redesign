@@ -1,6 +1,14 @@
 import type { ComponentProps } from "react";
 
-type Variant = "primary" | "secondary" | "dark" | "outline" | "ink" | "light" | "outline-light";
+type Variant =
+  | "primary"
+  | "secondary"
+  | "dark"
+  | "outline"
+  | "ink"
+  | "light"
+  | "outline-light"
+  | "pill";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -13,6 +21,8 @@ const variants: Record<Variant, string> = {
   // For dark green surfaces (Get started banner)
   light: "border border-white bg-white text-forest hover:bg-mint-mist",
   "outline-light": "border border-white/40 bg-transparent text-white hover:border-white/70 hover:bg-white/10",
+  // Soft borderless pill for quiet "learn more" links
+  pill: "rounded-full! bg-surface text-ink hover:bg-line-soft",
 };
 
 export function Button({

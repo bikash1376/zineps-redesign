@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { CaretDownIcon, ListIcon, TranslateIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "./Button";
+import { LanguageMenu } from "./LanguageMenu";
 
 const links = ["Products", "Integrations", "Pricing", "Blogs", "Knowledge base"];
 
@@ -57,14 +58,7 @@ export function Navbar() {
 
         <div className="pointer-events-auto flex items-center justify-end gap-3 sm:gap-5">
           <motion.div style={{ y: actionsY }} className="hidden items-center gap-5 sm:flex">
-            <button
-              type="button"
-              aria-label="Change language"
-              className="hidden h-[42px] items-center justify-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle shadow-nav transition-colors hover:text-ink sm:flex"
-            >
-              <TranslateIcon size={25} className="block shrink-0" />
-              <CaretDownIcon size={14} weight="bold" className="block shrink-0" />
-            </button>
+            <LanguageMenu />
             <Button href="#" className="hidden px-7 ring-[0.7px] ring-black/8 sm:inline-flex">
               Sign up
             </Button>

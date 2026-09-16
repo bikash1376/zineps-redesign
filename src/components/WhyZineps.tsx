@@ -2,16 +2,13 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import {
   ArrowUpIcon,
-  ArrowUUpLeftIcon,
   CheckCircleIcon,
-  GlobeHemisphereWestIcon,
-  HandshakeIcon,
-  PackageIcon,
-  TruckIcon,
 } from "@phosphor-icons/react/ssr";
 import { Badge } from "./Badge";
+import { CoverageNotifications } from "./CoverageNotifications";
 import { Reveal } from "./motion/Reveal";
 import { ShipmentsChart } from "./ShipmentsChart";
+import { ShipmentsPanel } from "./ShipmentsPanel";
 
 const integrations = [
   { file: "shopify", name: "Shopify" },
@@ -25,19 +22,6 @@ const integrations = [
   { file: "sap", name: "SAP" },
 ];
 
-const shipments = [
-  { id: "#10482", carrier: "DHL For You", status: "Delivered", icon: CheckCircleIcon },
-  { id: "#10481", carrier: "PostNL", status: "In transit", icon: TruckIcon },
-  { id: "#10480", carrier: "GLS", status: "Return received", icon: ArrowUUpLeftIcon },
-  { id: "#10479", carrier: "DPD", status: "In transit", icon: TruckIcon },
-];
-
-const coverage = [
-  { title: "Worldwide", description: "200+ countries", meta: "Active", icon: GlobeHemisphereWestIcon },
-  { title: "Partners", description: "50+ logistics partners", meta: "Available", icon: HandshakeIcon },
-  { title: "Shipments", description: "1000+ methods", meta: "Now", icon: PackageIcon },
-];
-
 // 60 days of status; every day operational
 const uptimeDays = Array.from({ length: 60 });
 
@@ -47,6 +31,7 @@ function Card({
   description,
   className = "",
   delay = 0,
+  fade = false,
   children,
 }: {
   label: string;
@@ -54,6 +39,8 @@ function Card({
   description: string;
   className?: string;
   delay?: number;
+  /** Fade the visual out toward the card's bottom edge */
+  fade?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -64,18 +51,15 @@ function Card({
         <h3 className="mt-4 text-lg font-medium text-balance text-ink">{title}</h3>
         <p className="mt-1.5 max-w-[440px] text-[15px] text-pretty text-muted">{description}</p>
         <div className="relative mt-6 flex flex-1 items-end">{children}</div>
+        {/* Anchored to the card itself, so the fade always ends exactly at the bottom edge */}
+        {fade && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-b from-mint-mist/0 to-mint-mist"
+          />
+        )}
       </article>
     </Reveal>
-  );
-}
-
-/** Fades a visual out toward the card's bottom edge, like the reference bento. */
-function BottomFade() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-b from-mint-mist/0 to-mint-mist"
-    />
   );
 }
 
@@ -94,36 +78,22 @@ export function WhyZineps() {
         {/* 1 — wide */}
         <Card
           className="lg:col-span-3"
+          fade
           label="One platform for everything"
           title="Manage all your shipments, returns and logistics from one central hub"
           description="No hassle with multiple systems. Everything you need for successful shipping in one place."
         >
-          <div className="w-full translate-y-6 overflow-hidden rounded-t-xl bg-white shadow-border">
-            <div className="flex gap-1 border-b border-line px-4 pt-2.5 text-sm">
-              <span className="border-b-2 border-green px-2 pb-2 font-medium text-ink">Shipments</span>
-              <span className="px-2 pb-2 text-muted">Returns</span>
-              <span className="px-2 pb-2 text-muted">Logistics</span>
-            </div>
-            <ul className="divide-y divide-line">
-              {shipments.map((s) => (
-                <li key={s.id} className="flex items-center gap-3 px-4 py-2.5 text-sm sm:gap-4">
-                  <span className="w-14 shrink-0 font-medium text-ink tabular-nums sm:w-16">{s.id}</span>
-                  <span className="min-w-0 flex-1 truncate text-soft">{s.carrier}</span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-medium text-forest">
-                    <s.icon size={14} weight="bold" aria-hidden />
-                    {s.status}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          {/* Runs into the card's bottom padding so it meets the edge under the fade */}
+          <div className="-mb-6 w-full">
+            <ShipmentsPanel />
           </div>
-          <BottomFade />
         </Card>
 
         {/* 2 — narrow */}
         <Card
           className="lg:col-span-2"
           delay={0.1}
+          fade
           label="Fast integrations"
           title="Connect within minutes with your webshop, WMS or other systems"
           description="Through our dashboard or extensive API, you can quickly and easily integrate with all popular platforms."
@@ -132,7 +102,7 @@ export function WhyZineps() {
             {integrations.map((logo) => (
               <li
                 key={logo.file}
-                className="flex aspect-[4/3] items-center justify-center rounded-xl bg-white px-3 shadow-border"
+                className="flex aspect-[4/3] items-center justify-center rounded-xl bg-white px-3 shadow-border transition-[background-color,box-shadow] duration-200 ease-out hover:bg-surface-soft hover:shadow-border-hover"
               >
                 <span className="relative block h-6 w-full">
                   <Image
@@ -146,7 +116,6 @@ export function WhyZineps() {
               </li>
             ))}
           </ul>
-          <BottomFade />
         </Card>
 
         {/* 3 — narrow */}
@@ -181,24 +150,7 @@ export function WhyZineps() {
           title="Ship to more than 200+ countries worldwide"
           description="You have access to all major carriers and local transporters worldwide."
         >
-          <ul className="w-full space-y-2.5">
-            {coverage.map((c, i) => (
-              <li
-                key={c.title}
-                className="flex items-center gap-3.5 rounded-xl bg-white p-3.5 shadow-border max-sm:mx-0!"
-                style={{ marginInline: `${i * 14}px` }}
-              >
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-mint text-forest">
-                  <c.icon size={18} aria-hidden />
-                </span>
-                <span className="flex-1">
-                  <span className="block text-[15px] font-medium text-ink">{c.title}</span>
-                  <span className="block text-sm text-muted">{c.description}</span>
-                </span>
-                <span className="text-sm text-muted">{c.meta}</span>
-              </li>
-            ))}
-          </ul>
+          <CoverageNotifications />
         </Card>
 
         {/* 5 — full width */}

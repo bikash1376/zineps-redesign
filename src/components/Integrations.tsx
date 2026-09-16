@@ -1,5 +1,5 @@
-import { ArrowBadge } from "./ArrowBadge";
 import { Badge } from "./Badge";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Button } from "./Button";
 import { MagneticLogo, type Logo } from "./motion/MagneticLogo";
 
@@ -78,9 +78,14 @@ export function Integrations() {
             partners. Optimize your workflow, reduce your shipping costs and offer your customers a
             seamless shipping experience.
           </p>
-          <Button href="#" variant="ink" className="mt-8 pr-2.5">
+          {/* Soft pill CTA; background deepens and arrow nudges right on hover */}
+          <Button href="#" variant="pill" className="mt-8 h-12 gap-3">
             View integrations
-            <ArrowBadge className="text-ink" />
+            <ArrowRightIcon
+              size={18}
+              aria-hidden
+              className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+            />
           </Button>
 
           {/* Compact logo grid on smaller screens */}

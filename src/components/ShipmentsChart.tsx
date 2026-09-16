@@ -22,7 +22,8 @@ const format = (n: number) => n.toLocaleString("en-US");
 /** Shipments per month — Evil Charts bar chart with hover tooltip and a table view. */
 export function ShipmentsChart() {
   return (
-    <figure>
+    // CSS hover muting (see .bar-hover-mute in globals.css) keeps transitions smooth across re-renders
+    <figure className="bar-hover-mute">
       <EvilBarChart
         config={config}
         data={data}
@@ -33,7 +34,7 @@ export function ShipmentsChart() {
       >
         <EvilBarChart.XAxis dataKey="month" />
         <EvilBarChart.Tooltip roundness="lg" />
-        <EvilBarChart.Bar dataKey="shipments" enableHoverHighlight />
+        <EvilBarChart.Bar dataKey="shipments" barProps={{ activeBar: false }} />
       </EvilBarChart>
 
       {/* Table view for assistive tech */}
