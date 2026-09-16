@@ -78,7 +78,7 @@ export function ShippingTabs() {
   return (
     // Band starts white, so no top padding: the visible gap above stays exactly mt-section
     <section className="mt-section w-full bg-linear-to-b from-white to-surface-soft">
-      <div className="mx-auto grid w-full max-w-[1600px] items-start gap-12 px-4 pb-20 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-20 lg:pb-24">
+      <div className="mx-auto grid w-full max-w-[1600px] items-start gap-10 px-4 pb-16 sm:gap-12 sm:pb-20 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-20 lg:pb-24">
         {/* Copy */}
         <div
           role="tabpanel"
@@ -103,8 +103,8 @@ export function ShippingTabs() {
 
               <ul className="mt-8 space-y-3">
                 {tab.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3 text-base text-muted">
-                    <CheckCircleIcon size={20} className="shrink-0 text-soft" aria-hidden />
+                  <li key={feature} className="flex items-start gap-3 text-[15px] text-muted sm:text-base">
+                    <CheckCircleIcon size={20} className="mt-px shrink-0 text-soft sm:mt-0.5" aria-hidden />
                     {feature}
                   </li>
                 ))}
@@ -119,7 +119,7 @@ export function ShippingTabs() {
         </div>
 
         {/* Tabs (aligned with the title's first line) + product image */}
-        <div className="order-1 flex flex-col items-center gap-10 lg:order-2 lg:-mt-1.5">
+        <div className="order-1 flex flex-col items-center gap-8 sm:gap-10 lg:order-2 lg:-mt-1.5">
           <div
             role="tablist"
             aria-label="Shipping solutions"

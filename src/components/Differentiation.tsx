@@ -15,7 +15,7 @@ const blobs = [
 export function Differentiation() {
   return (
     <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
-      <div className="relative overflow-hidden rounded-[14px] border-6 border-white bg-mint px-6 py-20 text-center shadow-raised sm:py-24">
+      <div className="relative overflow-hidden rounded-[14px] border-4 border-white bg-mint sm:border-6 px-5 py-16 text-center shadow-raised sm:px-6 sm:py-24">
         <ParallaxBlobs blobs={blobs} />
 
         <div className="relative mx-auto max-w-[560px]">

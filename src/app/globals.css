@@ -282,6 +282,11 @@
   );
 }
 
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: #ffffff;
   color: var(--color-ink);

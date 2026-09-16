@@ -36,7 +36,7 @@ export function GlobalScale() {
 
       <div className="relative mt-10 flex flex-col overflow-hidden rounded-[14px] bg-linear-to-b from-[#FDFDFD] to-[#E9E9E9] px-4 pt-6 sm:px-8 lg:block lg:px-0 lg:pt-16">
         {/* Stats sit on top of the globe on desktop; they stack above it on smaller screens */}
-        <dl className="relative z-10 grid gap-3 sm:grid-cols-3 lg:static lg:block">
+        <dl className="relative z-10 grid gap-3 md:grid-cols-3 lg:static lg:block">
           {statistics.map((stat) => (
             <div
               key={stat.value}
@@ -49,7 +49,7 @@ export function GlobalScale() {
         </dl>
 
         {/* Only the top half of the globe shows: a 2:1 window over a square canvas */}
-        <div className="relative mx-auto mt-10 aspect-[2/1] w-full max-w-[760px] overflow-hidden lg:mt-0">
+        <div className="relative mx-auto mt-8 aspect-[2/1] w-full max-w-[760px] overflow-hidden sm:mt-10 lg:mt-0">
           <Globe className="absolute inset-x-0 top-0" />
         </div>
       </div>

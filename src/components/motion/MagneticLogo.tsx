@@ -21,7 +21,7 @@ export function MagneticLogo({ logo }: { logo: Logo }) {
       whileHover={{ scale: 1.06 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onPointerMove={(e) => {
-        if (reduceMotion) return;
+        if (reduceMotion || e.pointerType !== "mouse") return;
         const rect = e.currentTarget.getBoundingClientRect();
         x.set((e.clientX - (rect.left + rect.width / 2)) * PULL);
         y.set((e.clientY - (rect.top + rect.height / 2)) * PULL);

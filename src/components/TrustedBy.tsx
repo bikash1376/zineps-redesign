@@ -4,11 +4,11 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const logos = [
-  { src: "/images/12mate.png", alt: "12Mate", width: 200, height: 86, className: "h-16" },
-  { src: "/images/101kruiden.svg", alt: "101kruiden", width: 232, height: 50, className: "h-11" },
-  { src: "/images/monkeyparts.png", alt: "Monkey Parts", width: 226, height: 57, className: "h-12" },
-  { src: "/images/thetester.svg", alt: "The Tester", width: 225, height: 75, className: "h-14" },
-  { src: "/images/trentdierenvoer.png", alt: "Trentdierenvoer", width: 175, height: 54, className: "h-12" },
+  { src: "/images/12mate.png", alt: "12Mate", width: 200, height: 86, className: "h-12 sm:h-16" },
+  { src: "/images/101kruiden.svg", alt: "101kruiden", width: 232, height: 50, className: "h-8 sm:h-11" },
+  { src: "/images/monkeyparts.png", alt: "Monkey Parts", width: 226, height: 57, className: "h-9 sm:h-12" },
+  { src: "/images/thetester.svg", alt: "The Tester", width: 225, height: 75, className: "h-10 sm:h-14" },
+  { src: "/images/trentdierenvoer.png", alt: "Trentdierenvoer", width: 175, height: 54, className: "h-9 sm:h-12" },
 ];
 
 // Two identical halves; the track slides by exactly one half so the loop is seamless.
@@ -54,7 +54,7 @@ export function TrustedBy({ duration, hoverRate = HOVER_RATE }: TrustedByProps) 
           {track.map((logo, i) => (
             <div
               key={i}
-              className="flex shrink-0 items-center px-10 md:px-14"
+              className="flex shrink-0 items-center px-6 sm:px-10 md:px-14"
               aria-hidden={i >= logos.length}
             >
               <Image

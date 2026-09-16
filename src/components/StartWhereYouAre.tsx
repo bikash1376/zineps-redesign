@@ -21,7 +21,7 @@ const paths = [
 export function StartWhereYouAre() {
   return (
     <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <Badge>Software, network, and intelligence</Badge>
           <h2 className="mt-5 text-3xl font-medium text-balance text-ink">Start where you are</h2>
@@ -29,7 +29,7 @@ export function StartWhereYouAre() {
             Merchants start shipping in minutes, including partner rates. Logistics partners digitize
             their offering and bring their merchants with them.
           </p>
-          <div className="mt-8 flex flex-wrap gap-[23px]">
+          <div className="mt-8 flex flex-wrap gap-3 sm:gap-[23px]">
             <Button href="#">Start shipping</Button>
             <Button href="#" variant="secondary">
               I’m a logistics partner
@@ -42,7 +42,7 @@ export function StartWhereYouAre() {
             <li key={path.title}>
               <a
                 href={path.href}
-                className="group flex items-start gap-5 rounded-[20px] bg-mint-mist p-6 shadow-border transition-[box-shadow] duration-150 ease-out hover:shadow-border-hover"
+                className="group flex items-start gap-4 rounded-[20px] bg-mint-mist p-5 shadow-border sm:gap-5 sm:p-6 transition-[box-shadow] duration-150 ease-out hover:shadow-border-hover"
               >
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-forest shadow-border">
                   <path.icon size={22} />

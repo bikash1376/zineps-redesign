@@ -68,7 +68,7 @@ export function ShipmentsPanel() {
 
   return (
     <div ref={ref} className="w-full overflow-hidden rounded-t-xl bg-white shadow-border">
-      <div role="tablist" aria-label="Shipping hub views" className="flex gap-1 border-b border-line px-4 pt-2.5 text-sm">
+      <div role="tablist" aria-label="Shipping hub views" className="flex gap-1 overflow-x-auto border-b border-line px-2 text-sm [scrollbar-width:none] sm:px-3">
         {tabs.map((t, i) => {
           const selected = i === active;
           return (
@@ -80,7 +80,7 @@ export function ShipmentsPanel() {
               aria-selected={selected}
               aria-controls={`${baseId}-panel`}
               onClick={() => setActive(i)}
-              className={`relative px-2 pb-2 transition-colors duration-150 ${
+              className={`relative shrink-0 px-2.5 pt-3 pb-2.5 transition-colors duration-150 ${
                 selected ? "font-medium text-ink" : "text-muted hover:text-ink"
               }`}
             >
@@ -108,8 +108,8 @@ export function ShipmentsPanel() {
             className="divide-y divide-line"
           >
             {tab.rows.map((r) => (
-              <motion.li key={r.id} variants={row} className="flex items-center gap-3 px-4 py-2.5 text-sm sm:gap-4">
-                <span className="w-16 shrink-0 font-medium text-ink tabular-nums">{r.id}</span>
+              <motion.li key={r.id} variants={row} className="flex items-center gap-3 px-3 py-2.5 text-sm sm:gap-4 sm:px-4">
+                <span className="w-14 shrink-0 font-medium text-ink tabular-nums sm:w-16">{r.id}</span>
                 <span className="min-w-0 flex-1 truncate text-soft">{r.detail}</span>
                 <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-medium text-forest">
                   <r.icon size={14} weight="bold" aria-hidden />

@@ -69,7 +69,7 @@ export function ShippingAI() {
         />
 
         {/* Copy and action */}
-        <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-20 lg:pr-10 lg:pl-20">
+        <div className="relative px-5 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-20 lg:pr-10 lg:pl-20">
           {/* Copy reveals block by block as the panel scrolls into view */}
           <Reveal inView>
             <Badge>Shipping AI</Badge>
@@ -98,10 +98,10 @@ export function ShippingAI() {
           inView
           from="right"
           delay={0.15}
-          className="relative pl-6 sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0"
+          className="relative pl-5 sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0"
         >
           <div className="-mr-[20%] rounded-tl-[20px] bg-white/70 p-2 pr-0 pb-0 shadow-border backdrop-blur lg:mr-0">
-            <div className="rounded-tl-xl bg-white p-5 pr-[30%] pb-20 shadow-border lg:pr-[38%] lg:pb-40">
+            <div className="rounded-tl-xl bg-white p-4 pr-[18%] pb-16 shadow-border sm:p-5 sm:pr-[30%] sm:pb-20 lg:pr-[38%] lg:pb-40">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
                 <div className="flex items-center gap-3">
                   <span className="flex size-9 items-center justify-center rounded-lg bg-mint-soft text-forest">
@@ -125,15 +125,15 @@ export function ShippingAI() {
                 {options.map((option) => (
                   <li
                     key={option.carrier}
-                    className={`relative flex items-center gap-4 rounded-lg p-3 ${
+                    className={`relative flex items-center gap-3 rounded-lg p-2.5 sm:gap-4 sm:p-3 ${
                       option.recommended ? "bg-mint-mist shadow-[inset_0_0_0_1px_rgb(96_148_138/0.35)]" : ""
                     }`}
                   >
-                    <span className="relative block h-7 w-14 shrink-0">
+                    <span className="relative block h-6 w-11 shrink-0 sm:h-7 sm:w-14">
                       <Image src={option.logo} alt={option.carrier} fill sizes="56px" className="object-contain" />
                     </span>
-                    <span className="flex-1">
-                      <span className="flex items-center gap-2 text-sm font-medium text-ink">
+                    <span className="min-w-0 flex-1">
+                      <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-ink">
                         {option.carrier}
                         {option.recommended && (
                           <span className="inline-flex items-center gap-1 rounded-full bg-forest px-2 py-0.5 text-[11px] font-medium text-white">

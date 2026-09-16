@@ -5,9 +5,9 @@ import { Reveal } from "./motion/Reveal";
 export function Hero() {
   return (
     <section className="mx-auto w-full max-w-[1600px] px-4 pt-8 md:px-10 md:pt-12 lg:px-20">
-      <p className="text-base font-medium text-green">
+      {/* <p className="text-base font-medium text-green">
         For businesses that ship, and the logistics partners that move their goods
-      </p>
+      </p> */}
 
       {/* Block-level float-up, staggered ~100ms: title → copy → actions → dashboard */}
       <Reveal>
@@ -23,7 +23,7 @@ export function Hero() {
         </p>
       </Reveal>
       <Reveal delay={0.2}>
-        <div className="mt-8 flex flex-wrap gap-[23px]">
+        <div className="mt-8 flex flex-wrap gap-3 sm:gap-[23px]">
           <Button href="#">Start Shipping</Button>
           <Button href="#" variant="secondary">
             I’m a logistics partner
@@ -33,7 +33,7 @@ export function Hero() {
 
       {/* Dashboard showcase */}
       <Reveal delay={0.3}>
-        <div className="dashboard-backdrop relative -mx-2 mt-14 overflow-hidden rounded-[14px] px-6 py-3 sm:-mx-6 sm:px-16 sm:py-8 lg:-mx-12 lg:px-32 lg:py-14">
+        <div className="dashboard-backdrop relative -mx-2 mt-10 overflow-hidden sm:mt-14 rounded-[14px] px-6 py-3 sm:-mx-6 sm:px-16 sm:py-8 lg:-mx-12 lg:px-32 lg:py-14">
           <div className="relative overflow-hidden rounded-2xl bg-white drop-shadow-dashboard">
             <Image
               src="/images/dashboard.png"

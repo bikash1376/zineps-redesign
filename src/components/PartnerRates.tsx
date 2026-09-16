@@ -18,11 +18,11 @@ const blobs = [
 export function PartnerRates() {
   return (
     <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
-      <div className="relative overflow-hidden rounded-[14px] border-6 border-white bg-mint shadow-raised">
+      <div className="relative overflow-hidden rounded-[14px] border-4 border-white bg-mint sm:border-6 shadow-raised">
         <ParallaxBlobs blobs={blobs} />
 
         {/* Copy and action */}
-        <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-28 lg:pr-10 lg:pl-20">
+        <div className="relative px-5 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-28 lg:pr-10 lg:pl-20">
           {/* Copy reveals block by block as the panel scrolls into view */}
           <Reveal inView>
             <Badge>Partner shipping rates</Badge>
@@ -52,7 +52,7 @@ export function PartnerRates() {
           inView
           from="right"
           delay={0.15}
-          className="relative pl-6 drop-shadow-mockup sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0"
+          className="relative pl-5 drop-shadow-mockup sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0"
         >
           <div className="-mr-[20%] overflow-hidden rounded-tl-2xl border border-forest/10 bg-white lg:mr-0">
             <Image

@@ -46,7 +46,7 @@ function Card({
   return (
     // Grid span lives on the reveal wrapper so the float-up doesn't break the bento layout
     <Reveal inView delay={delay} className={className}>
-      <article className="relative flex h-full flex-col overflow-hidden rounded-[20px] bg-mint-mist p-6 shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover">
+      <article className="relative flex h-full flex-col overflow-hidden rounded-[20px] bg-mint-mist p-5 shadow-border sm:p-6 transition-shadow duration-200 ease-out hover:shadow-border-hover">
         <Badge>{label}</Badge>
         <h3 className="mt-4 text-lg font-medium text-balance text-ink">{title}</h3>
         <p className="mt-1.5 max-w-[440px] text-[15px] text-pretty text-muted">{description}</p>
@@ -74,17 +74,17 @@ export function WhyZineps() {
         </h2>
       </div>
 
-      <div className="mx-auto mt-heading grid max-w-[1200px] gap-4 lg:grid-cols-5">
+      <div className="mx-auto mt-heading grid max-w-[1200px] gap-4 md:grid-cols-2 lg:grid-cols-5">
         {/* 1 — wide */}
         <Card
-          className="lg:col-span-3"
+          className="md:col-span-2 lg:col-span-3"
           fade
           label="One platform for everything"
           title="Manage all your shipments, returns and logistics from one central hub"
           description="No hassle with multiple systems. Everything you need for successful shipping in one place."
         >
           {/* Runs into the card's bottom padding so it meets the edge under the fade */}
-          <div className="-mb-6 w-full">
+          <div className="-mb-5 w-full sm:-mb-6">
             <ShipmentsPanel />
           </div>
         </Card>
@@ -144,7 +144,7 @@ export function WhyZineps() {
 
         {/* 4 — wide */}
         <Card
-          className="lg:col-span-3"
+          className="md:col-span-2 lg:col-span-3"
           delay={0.2}
           label="Global coverage"
           title="Ship to more than 200+ countries worldwide"
@@ -154,7 +154,7 @@ export function WhyZineps() {
         </Card>
 
         {/* 5 — full width */}
-        <Reveal inView delay={0.1} className="lg:col-span-5">
+        <Reveal inView delay={0.1} className="md:col-span-2 lg:col-span-5">
         <article className="relative grid h-full gap-6 overflow-hidden rounded-[20px] bg-mint-mist p-6 shadow-border transition-shadow duration-200 ease-out hover:shadow-border-hover lg:grid-cols-2 lg:items-center">
           <div>
             <Badge>Scalability & Uptime</Badge>
