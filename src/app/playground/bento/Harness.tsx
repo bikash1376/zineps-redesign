@@ -2,12 +2,27 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Badge } from "@/components/Badge";
+import { Clay } from "./v-clay";
+import { Command } from "./v-command";
+import { Data } from "./v-data";
+import { Framed3 } from "./v-framed";
+import { Journey } from "./v-journey";
+import { Pastel } from "./v-pastel";
+import { SoftUI } from "./v-softui";
 import { Editorial, Mosaic, Spotlight } from "./variants";
 
+// Round 1: interaction/layout explorations · Round 2: ref/bento1–4 styles · Round 3: product-native
 const variants = [
   { name: "Spotlight", Component: Spotlight },
   { name: "Mosaic", Component: Mosaic },
   { name: "Editorial", Component: Editorial },
+  { name: "Pastel", Component: Pastel },
+  { name: "Clay", Component: Clay },
+  { name: "Soft UI", Component: SoftUI },
+  { name: "Data", Component: Data },
+  { name: "Journey", Component: Journey },
+  { name: "Command", Component: Command },
+  { name: "Framed", Component: Framed3 },
 ];
 
 // Picker styles — verbatim from .agents/skills/prototype/PICKER.md (harness chrome, not a design decision)
@@ -70,7 +85,8 @@ export function Harness() {
       const t = e.target as HTMLElement;
       if (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
-      const num = parseInt(e.key, 10);
+      // 1–9 select directly; 0 selects the 10th variant
+      const num = e.key === "0" ? 10 : parseInt(e.key, 10);
       if (num >= 1 && num <= variants.length) setActive(num - 1);
       else if (e.key === "ArrowRight") setActive((current + 1) % variants.length);
       else if (e.key === "ArrowLeft") setActive((current - 1 + variants.length) % variants.length);
