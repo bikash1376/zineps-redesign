@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
+import { ArrowBadge } from "./ArrowBadge";
+import { Badge } from "./Badge";
 import { Button } from "./Button";
 
 // Decorative circles from Figma (Desktop - 4), positioned relative to the 1240×598 frame.
@@ -14,7 +15,7 @@ const blobs = [
 
 export function PartnerRates() {
   return (
-    <section className="mx-auto mt-[130px] w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
+    <section className="mx-auto mt-section w-full max-w-[1600px] px-4 md:px-10 lg:px-20">
       <div className="relative overflow-hidden rounded-[14px] border-6 border-white bg-mint shadow-raised">
         {blobs.map((blob, i) => (
           <span
@@ -27,9 +28,7 @@ export function PartnerRates() {
 
         {/* Copy and action */}
         <div className="relative px-6 pt-10 pb-10 sm:px-12 sm:pt-14 lg:w-1/2 lg:py-28 lg:pr-10 lg:pl-20">
-          <span className="inline-flex items-center rounded-full border border-forest/15 bg-white/70 px-4 py-1.5 text-sm font-medium text-forest shadow-card">
-            Partner shipping rates
-          </span>
+          <Badge>Partner shipping rates</Badge>
 
           <h2 className="mt-5 text-3xl font-medium text-ink">
             Their buying power <br className="hidden sm:block" />
@@ -42,9 +41,9 @@ export function PartnerRates() {
           </p>
 
           <div className="mt-10">
-            <Button href="#" variant="dark">
+            <Button href="#" variant="dark" className="pr-2.5">
               Start free
-              <ArrowRightIcon size={18} weight="bold" />
+              <ArrowBadge className="text-forest" />
             </Button>
           </div>
         </div>

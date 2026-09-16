@@ -43,7 +43,7 @@ export function MarqueeLab() {
       </div>
 
       {/* Re-mount on duration change so the new speed applies immediately */}
-      <div className="-mx-4 -mt-16 md:-mx-10 lg:-mx-20">
+      <div className="-mx-4 md:-mx-10 lg:-mx-20 [&>section]:mt-10">
         <TrustedBy key={duration} duration={duration} hoverRate={hoverRate} />
       </div>
     </div>
