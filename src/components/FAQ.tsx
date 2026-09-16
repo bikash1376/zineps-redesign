@@ -83,13 +83,13 @@ export function FAQ() {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-6 rounded-3xl px-6 py-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-green/40"
+                  className="flex w-full items-center justify-between gap-4 rounded-3xl px-4 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-green/40 sm:gap-6 sm:px-6 sm:py-5"
                 >
-                  <span className="flex items-baseline gap-4">
-                    <span className="w-6 text-sm text-muted tabular-nums">
+                  <span className="flex items-baseline gap-3 sm:gap-4">
+                    <span className="w-6 shrink-0 text-sm text-muted tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-lg font-medium text-ink">{faq.question}</span>
+                    <span className="text-base font-medium text-balance text-ink sm:text-lg">{faq.question}</span>
                   </span>
                   <ToggleIcon open={isOpen} />
                 </button>
@@ -103,7 +103,9 @@ export function FAQ() {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="pr-16 pb-6 pl-16 text-base text-pretty text-muted">{faq.answer}</p>
+                  <p className="px-4 pb-5 text-[15px] text-pretty text-muted sm:pr-16 sm:pb-6 sm:pl-16 sm:text-base">
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             </div>

@@ -19,11 +19,11 @@ export function Stats() {
         </p>
       </div>
 
-      <dl className="mt-heading grid grid-cols-2 gap-10 rounded-[14px] bg-linear-to-b from-green to-forest px-6 py-12 text-center inset-shadow-glow sm:py-14 lg:grid-cols-4 lg:gap-6">
+      <dl className="mt-heading grid grid-cols-2 gap-x-4 gap-y-10 rounded-[14px] bg-linear-to-b from-green to-forest px-4 py-12 text-center inset-shadow-glow sm:px-6 sm:py-14 lg:grid-cols-4 lg:gap-6">
         {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col-reverse">
-            <dt className="mt-2 text-base font-medium text-mint">{stat.label}</dt>
-            <dd className="text-5xl font-medium text-white sm:text-6xl">
+            <dt className="mt-2 text-sm font-medium text-mint sm:text-base">{stat.label}</dt>
+            <dd className="text-4xl font-medium text-white sm:text-5xl lg:text-6xl">
               <CountUp value={stat.value} />
             </dd>
           </div>

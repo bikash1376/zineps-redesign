@@ -106,9 +106,9 @@ export function WhyZineps() {
             </div>
             <ul className="divide-y divide-line">
               {shipments.map((s) => (
-                <li key={s.id} className="flex items-center gap-4 px-4 py-2.5 text-sm">
-                  <span className="w-16 font-medium text-ink tabular-nums">{s.id}</span>
-                  <span className="flex-1 text-soft">{s.carrier}</span>
+                <li key={s.id} className="flex items-center gap-3 px-4 py-2.5 text-sm sm:gap-4">
+                  <span className="w-14 shrink-0 font-medium text-ink tabular-nums sm:w-16">{s.id}</span>
+                  <span className="min-w-0 flex-1 truncate text-soft">{s.carrier}</span>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-medium text-forest">
                     <s.icon size={14} weight="bold" aria-hidden />
                     {s.status}
@@ -185,7 +185,7 @@ export function WhyZineps() {
             {coverage.map((c, i) => (
               <li
                 key={c.title}
-                className="flex items-center gap-3.5 rounded-xl bg-white p-3.5 shadow-border"
+                className="flex items-center gap-3.5 rounded-xl bg-white p-3.5 shadow-border max-sm:mx-0!"
                 style={{ marginInline: `${i * 14}px` }}
               >
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-mint text-forest">
@@ -228,11 +228,15 @@ export function WhyZineps() {
             </p>
             <div className="mt-4 flex h-8 gap-[3px]" role="img" aria-label="Operational every day for the last 60 days">
               {uptimeDays.map((_, i) => (
-                <span key={i} className="flex-1 rounded-[2px] bg-chart" />
+                // Phones show the last 30 days so bars stay readable
+                <span key={i} className={`flex-1 rounded-[2px] bg-chart ${i < 30 ? "hidden sm:block" : ""}`} />
               ))}
             </div>
             <div className="mt-2 flex justify-between text-xs text-muted" aria-hidden>
-              <span>60 days ago</span>
+              <span>
+                <span className="sm:hidden">30</span>
+                <span className="hidden sm:inline">60</span> days ago
+              </span>
               <span>Today</span>
             </div>
           </div>

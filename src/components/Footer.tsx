@@ -39,8 +39,9 @@ const socials = [
 export function Footer() {
   return (
     <footer className="mx-auto mt-section w-full max-w-[1600px] px-4 pb-10 md:px-10 lg:px-20">
-      <div className="grid gap-12 border-t border-line pt-16 lg:grid-cols-[minmax(0,1.3fr)_repeat(3,minmax(0,1fr))]">
-        <div>
+      <div className="grid grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-12 sm:pt-16 lg:grid-cols-[minmax(0,1.3fr)_repeat(3,minmax(0,1fr))] lg:gap-12">
+        {/* Brand spans the full row on phones/tablets; link columns pair up beneath it */}
+        <div className="col-span-2 lg:col-span-1">
           <a href="#" aria-label="Zineps home" className="inline-block">
             <Image src="/images/zineps-logo.svg" alt="Zineps" width={100} height={22} />
           </a>

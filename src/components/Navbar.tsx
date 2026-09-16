@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { CaretDownIcon, TranslateIcon } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "motion/react";
+import { CaretDownIcon, ListIcon, TranslateIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "./Button";
 
 const links = ["Products", "Integrations", "Pricing", "Blogs", "Knowledge base"];
@@ -10,6 +11,7 @@ const links = ["Products", "Integrations", "Pricing", "Blogs", "Knowledge base"]
 export function Navbar() {
   // The whole bar turns to frosted glass once the page scrolls beneath it
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -18,6 +20,21 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu on Escape or when resizing up to desktop
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    const onResize = () => window.innerWidth >= 1024 && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [menuOpen]);
+
+  const glass = scrolled || menuOpen;
+
   return (
     // Only the pill and actions catch clicks; the rest of the bar lets the page through
     <div className="pointer-events-none sticky top-0 z-50 w-full">
@@ -25,7 +42,7 @@ export function Navbar() {
       <div
         aria-hidden
         className={`absolute inset-x-0 top-0 h-[calc(100%+40px)] bg-linear-to-b from-white/75 via-white/45 to-white/0 [mask-image:linear-gradient(to_bottom,black_45%,transparent)] backdrop-blur-xl backdrop-saturate-150 transition-opacity duration-300 ease-out ${
-          scrolled ? "opacity-100" : "opacity-0"
+          glass ? "opacity-100" : "opacity-0"
         }`}
       />
       <header className="relative mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 py-3 md:px-10 lg:px-20 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-10">
@@ -34,7 +51,7 @@ export function Navbar() {
 
         <nav
           className={`pointer-events-auto flex h-[54px] shrink-0 items-center gap-6 rounded-2xl border-[0.7px] pr-2.5 pl-5 transition-[background-color,border-color,box-shadow] duration-300 ease-out ${
-            scrolled ? "border-transparent bg-transparent shadow-none" : "border-black/8 bg-white shadow-nav"
+            glass ? "border-transparent bg-transparent shadow-none" : "border-black/8 bg-white shadow-nav"
           }`}
         >
           <a href="#" aria-label="Zineps home" className="shrink-0">
@@ -55,7 +72,7 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="pointer-events-auto flex items-center justify-end gap-5">
+        <div className="pointer-events-auto flex items-center justify-end gap-3 sm:gap-5">
           <button
             type="button"
             aria-label="Change language"
@@ -64,10 +81,75 @@ export function Navbar() {
             <TranslateIcon size={25} className="block shrink-0" />
             <CaretDownIcon size={14} weight="bold" className="block shrink-0" />
           </button>
-          <Button href="#" className="px-7 shadow-none">
+          <Button href="#" className="hidden px-7 shadow-none sm:inline-flex">
             Sign up
           </Button>
+
+          {/* Mobile / tablet menu toggle */}
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="relative flex size-11 items-center justify-center rounded-xl border-[0.7px] border-line bg-white text-ink shadow-button transition-[scale] duration-150 ease-out active:scale-[0.96] lg:hidden"
+          >
+            <ListIcon
+              size={22}
+              aria-hidden
+              className={`absolute transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
+                menuOpen ? "scale-[0.25] opacity-0 blur-[4px]" : "scale-100 opacity-100 blur-0"
+              }`}
+            />
+            <XIcon
+              size={22}
+              aria-hidden
+              className={`absolute transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
+                menuOpen ? "scale-100 opacity-100 blur-0" : "scale-[0.25] opacity-0 blur-[4px]"
+              }`}
+            />
+          </button>
         </div>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, y: -8, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.98, transition: { duration: 0.15 } }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="pointer-events-auto absolute inset-x-4 top-full origin-top rounded-2xl bg-white p-2 shadow-raised md:inset-x-10 lg:hidden"
+            >
+              <ul className="flex flex-col">
+                {links.map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      onClick={() => setMenuOpen(false)}
+                      className="flex h-12 items-center rounded-xl px-4 text-base font-medium text-ink transition-colors duration-150 hover:bg-mint-mist"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-2 flex items-center gap-2 border-t border-line px-2 pt-3 pb-1">
+                <button
+                  type="button"
+                  aria-label="Change language"
+                  className="flex h-[42px] items-center gap-1.5 rounded-xl border-[0.7px] border-line bg-linear-to-b from-white to-line-soft px-3.5 text-subtle sm:hidden"
+                >
+                  <TranslateIcon size={22} aria-hidden />
+                  <CaretDownIcon size={14} weight="bold" aria-hidden />
+                </button>
+                <Button href="#" className="flex-1 shadow-none sm:hidden">
+                  Sign up
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
     </div>
   );

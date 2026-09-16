@@ -156,16 +156,16 @@ export function RecentNews() {
                 className="absolute inset-x-0 bottom-0 h-3/4 bg-linear-to-b from-black/0 via-black/45 to-black/85"
               />
 
-              <p className="absolute top-5 left-5 text-xs font-medium tracking-wide text-white uppercase">
+              <p className="absolute top-4 left-4 text-xs sm:top-5 sm:left-5 font-medium tracking-wide text-white uppercase">
                 {item.category}
                 <span className="mt-0.5 block font-normal tracking-normal text-white/80 normal-case">
                   <time>{item.date}</time>
                 </span>
               </p>
 
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <h3 className="text-xl font-medium text-balance text-white">{item.title}</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-pretty text-white/80">{item.excerpt}</p>
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                <h3 className="line-clamp-3 text-lg font-medium text-balance text-white sm:text-xl">{item.title}</h3>
+                <p className="mt-2 hidden text-sm text-pretty text-white/80 sm:line-clamp-2">{item.excerpt}</p>
               </div>
             </a>
           </li>

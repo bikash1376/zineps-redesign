@@ -82,6 +82,20 @@
   }
 }
 
+/* Tighter rhythm on phones and small tablets (theme vars are plain CSS custom properties) */
+@media (max-width: 767px) {
+  :root {
+    --spacing-section: 96px;
+    --spacing-heading: 40px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --spacing-section: 124px;
+    --spacing-heading: 52px;
+  }
+}
+
 /* Dotted halo behind the subscribe card (Figma contact-us inspo), fading out toward the edges */
 .dot-halo {
   background-image: radial-gradient(rgb(96 148 138 / 0.45) 1px, transparent 1.3px);
