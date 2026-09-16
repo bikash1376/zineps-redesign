@@ -38,12 +38,11 @@ export function Hero() {
             <Image
               src="/images/dashboard.png"
               alt="Zineps dashboard showing open orders, updates and recent shipments"
-              width={1104}
-              height={756}
+              width={1234}
+              height={848}
               className="h-auto w-full"
               priority
             />
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/0 from-60% to-white to-[115%]" />
           </div>
         </div>
       </Reveal>

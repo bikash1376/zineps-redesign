@@ -19,8 +19,9 @@ const variants: Record<Variant, string> = {
   outline: "border border-forest/25 bg-white text-forest shadow-button hover:border-forest/50",
   ink: "border border-ink bg-ink text-white shadow-button hover:bg-[#333333]",
   // For dark green surfaces (Get started banner)
-  light: "border border-white bg-white text-forest hover:bg-mint-mist",
-  "outline-light": "border border-white/40 bg-transparent text-white hover:border-white/70 hover:bg-white/10",
+  light: "bg-white text-forest shadow-nav hover:bg-mint-mist",
+  "outline-light":
+    "border-[0.7px] border-white/25 bg-white/10 text-white shadow-nav inset-shadow-[0_1px_0_rgb(255_255_255/0.15)] hover:border-white/40 hover:bg-white/15",
   // Soft borderless pill for quiet "learn more" links
   pill: "rounded-full! bg-surface text-ink hover:bg-line-soft",
 };

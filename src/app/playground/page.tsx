@@ -229,7 +229,7 @@ export default function Playground() {
                 <tr>
                   <td className="bg-linear-to-b from-green to-forest px-4 py-4">
                     <div className="flex flex-wrap gap-3">
-                      <Button href="#" variant="light" className="pr-2.5">
+                      <Button href="#" variant="light" className="pr-[9px] pl-5">
                         Start your trial
                         <ArrowBadge className="bg-forest! text-white" />
                       </Button>

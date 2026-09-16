@@ -251,6 +251,122 @@
   }
 }
 
+/* "Why Zineps" bento chip icons (BentoIcons.tsx), same hover model as the path icons above */
+.globe-meridian,
+.shield-pulse {
+  transform-origin: center;
+}
+.globe-dot {
+  opacity: 0;
+}
+.chart-bar {
+  transform-origin: bottom;
+}
+.plug-spark {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+.shield-check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.shield-pulse {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .plug-body {
+    transition: transform 320ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .plug-spark {
+    transition:
+      stroke-dashoffset 260ms cubic-bezier(0.2, 0, 0, 1) 140ms,
+      opacity 160ms ease-out 140ms;
+  }
+  .group:hover .globe-meridian {
+    animation: globe-turn 1.4s ease-in-out infinite;
+  }
+  .group:hover .globe-dot {
+    animation: globe-orbit 1.4s ease-in-out infinite;
+  }
+  .group:hover .plug-body {
+    transform: translateX(1.5px);
+  }
+  .group:hover .plug-spark {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  .group:hover .package-lid {
+    animation: lid-pop 600ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .group:hover .chart-bar {
+    animation: bar-grow 520ms cubic-bezier(0.2, 0, 0, 1) backwards;
+  }
+  .group:hover .chart-bar-2 {
+    animation-delay: 70ms;
+  }
+  .group:hover .chart-bar-3 {
+    animation-delay: 140ms;
+  }
+  .group:hover .shield-check {
+    animation: path-draw 450ms cubic-bezier(0.2, 0, 0, 1) backwards;
+  }
+  .group:hover .shield-pulse {
+    animation: shield-pulse 1.2s ease-out infinite;
+  }
+}
+@keyframes globe-turn {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.15);
+  }
+}
+@keyframes globe-orbit {
+  0% {
+    transform: translateX(-7px);
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(7px);
+    opacity: 0;
+  }
+}
+@keyframes lid-pop {
+  40% {
+    transform: translateY(-2.5px);
+  }
+  70% {
+    transform: translateY(0.5px);
+  }
+}
+@keyframes bar-grow {
+  from {
+    transform: scaleY(0.3);
+  }
+}
+@keyframes path-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes shield-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  to {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
 /* Soft fade on both edges of the logo marquee */
 .marquee-mask {
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);

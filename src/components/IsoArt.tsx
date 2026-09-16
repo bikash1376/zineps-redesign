@@ -402,7 +402,7 @@ function Parcel({
 export function IsoHub({ className = "" }: { className?: string }) {
   const uid = useUid();
   const s = 11;
-  const [cx, cy] = iso(7.6, 1, 9.2, s);
+  const [cx, cy] = iso(0.2, 7.2, 8.6, s);
   return (
     <svg viewBox="-100 -85 200 200" className={className} aria-hidden>
       <Defs uid={uid} />
@@ -514,9 +514,9 @@ export function IsoServer({ className = "" }: { className?: string }) {
   const uid = useUid();
   const s = 11;
   const units = [0, 1.9, 3.8];
-  const [bx, by] = iso(6.6, 0.4, 7.6, s);
+  const [bx, by] = iso(0.2, 6.8, 7.8, s);
   return (
-    <svg viewBox="-75 -75 160 170" className={className} aria-hidden>
+    <svg viewBox="-88 -75 173 170" className={className} aria-hidden>
       <Defs uid={uid} />
       <GroundShadow x={0} y={0} w={6} d={6} s={s} filterId={`${uid}-soft`} />
       {units.map((z, u) => (

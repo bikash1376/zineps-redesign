@@ -100,8 +100,8 @@ export function ShippingAI() {
           delay={0.15}
           className="relative pl-5 sm:pl-12 lg:absolute lg:top-[18%] lg:left-[54%] lg:w-[64%] lg:pl-0"
         >
-          <div className="-mr-[20%] rounded-tl-[20px] bg-white/70 p-2 pr-0 pb-0 shadow-border backdrop-blur lg:mr-0">
-            <div className="rounded-tl-xl bg-white p-4 pr-[18%] pb-16 shadow-border sm:p-5 sm:pr-[30%] sm:pb-20 lg:pr-[38%] lg:pb-40">
+          <div className="-mr-[20%] lg:mr-0">
+            <div className="rounded-tl-[20px] bg-white p-4 pr-[18%] pb-12 shadow-card sm:p-6 sm:pr-[30%] sm:pb-16 lg:pr-[38%] lg:pb-32">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
                 <div className="flex items-center gap-3">
                   <span className="flex size-9 items-center justify-center rounded-lg bg-mint-soft text-forest">
@@ -126,7 +126,7 @@ export function ShippingAI() {
                   <li
                     key={option.carrier}
                     className={`relative flex items-center gap-3 rounded-lg p-2.5 sm:gap-4 sm:p-3 ${
-                      option.recommended ? "bg-mint-mist shadow-[inset_0_0_0_1px_rgb(96_148_138/0.35)]" : ""
+                      option.recommended ? "bg-mint-mist" : ""
                     }`}
                   >
                     <span className="relative block h-6 w-11 shrink-0 sm:h-7 sm:w-14">
@@ -152,12 +152,6 @@ export function ShippingAI() {
                   </li>
                 ))}
               </ul>
-
-              <p className="mt-4 flex items-start gap-2 rounded-lg bg-surface-soft p-3 text-xs text-pretty text-soft">
-                <SparkleIcon size={14} weight="fill" className="mt-px shrink-0 text-green" aria-hidden />
-                DHL Parcel meets Thursday&apos;s promise with the lowest delay risk. PostNL is €0.35 cheaper
-                but misses it on 12% of this lane.
-              </p>
             </div>
           </div>
         </Reveal>
