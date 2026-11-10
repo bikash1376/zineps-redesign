@@ -1,11 +1,11 @@
-import { WhyZineps } from "@/components/WhyZineps";
+import { ClayBento } from "@/components/ClayBento";
 import { ReportHeight } from "../ReportHeight";
 
+// Just the cards from "Why Zineps", without the section heading.
 export default function EmbedBento() {
   return (
-    // the section's own top margin spaces it from the one above on the site; not needed here
-    <ReportHeight id="zineps-bento" className="py-12 [&>section]:mt-0">
-      <WhyZineps />
+    <ReportHeight id="zineps-bento" className="mx-auto w-full max-w-[1280px] px-10 py-10">
+      <ClayBento />
     </ReportHeight>
   );
 }
