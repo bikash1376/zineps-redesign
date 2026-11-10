@@ -3,9 +3,8 @@ import { ReportHeight } from "../ReportHeight";
 
 export default function EmbedHero() {
   return (
-    <div className="pb-10">
-      <ReportHeight id="zineps-hero" />
+    <ReportHeight id="zineps-hero" className="pb-10">
       <Hero />
-    </div>
+    </ReportHeight>
   );
 }
